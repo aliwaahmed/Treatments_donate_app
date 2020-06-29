@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#23408e</color>
+    <color name="colorPrimaryDark">#23408e</color>
+    <color name="colorAccent">#03DAC5</color>
+
+    <color name="needs_color">#53DD5A</color>
+
+
+    //medical colors palette .........
+    <color name="white_blue">#385399</color>
+    <color name="red">#ed1b24</color>
+    <color name="blue">#23408e</color>
+    <color name="gray">#EAEAEA</color>
+    <color name="white">#ffffff</color>
+
+    <color name="green">#19AE74</color>
+    <color name="oblue">#3B6EF6</color>
+
+</resources>

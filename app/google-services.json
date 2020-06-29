@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "203143133969",
+    "firebase_url": "https://treatmentsapp.firebaseio.com",
+    "project_id": "treatmentsapp",
+    "storage_bucket": "treatmentsapp.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:203143133969:android:2ea93e1c7ecc60ffafaab0",
+        "android_client_info": {
+          "package_name": "com.logapps.treatments_donate_app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "203143133969-mqqmdumgdbaroovi4lbgr9s776bh147f.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyATxG7jeNcdGattbIypZzpJFUrl6STLvVU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "203143133969-mqqmdumgdbaroovi4lbgr9s776bh147f.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
