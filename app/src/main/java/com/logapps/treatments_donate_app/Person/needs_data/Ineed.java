@@ -76,7 +76,7 @@ public class Ineed extends Fragment implements UserClick {
 
     TextView textView ;
     Context context ;
-    private ProgressDialog mProgress;
+    private ProgressDialog mProgresse;
 
     BottomNavigationView bottomNavigationView ;
 
@@ -235,10 +235,10 @@ public class Ineed extends Fragment implements UserClick {
                         final Uri id_uri = idUri.normalizeScheme();
 
 
-                        mProgress = new ProgressDialog(view.getContext());
-                        mProgress.setTitle("Saving Changes");
-                        mProgress.setMessage("Please wait while we save the changes");
-                        mProgress.show();
+                        mProgresse = new ProgressDialog(view.getContext());
+                        mProgresse.setTitle("Saving Changes");
+                        mProgresse.setMessage("Please wait while we save the changes");
+                        mProgresse.show();
 
                         Map map = new HashMap();
                         final String key = mPatientDatabase.push().getKey();
@@ -345,6 +345,10 @@ public class Ineed extends Fragment implements UserClick {
                                                                                                         public void onComplete(@NonNull Task<Void> task) {
 
                                                                                                             if (task.isSuccessful()) {
+                                                                                                                if(mProgresse.isShowing())
+                                                                                                                {
+                                                                                                                    mProgresse.dismiss();
+                                                                                                                }
                                                                                                             } else {
                                                                                                                 String message = task.getException().getMessage();
                                                                                                             }
@@ -432,7 +436,6 @@ public class Ineed extends Fragment implements UserClick {
 
                                         if(task.isSuccessful()){
 
-                                            mProgress.dismiss();
 
                                         } else {
 
@@ -451,7 +454,6 @@ public class Ineed extends Fragment implements UserClick {
 
                                         if(task.isSuccessful()){
 
-                                            mProgress.dismiss();
 
                                         } else {
 
@@ -471,7 +473,6 @@ public class Ineed extends Fragment implements UserClick {
 
                                         if(task.isSuccessful()){
 
-                                            mProgress.dismiss();
 
                                         } else {
 
@@ -492,7 +493,6 @@ public class Ineed extends Fragment implements UserClick {
 
                                         if(task.isSuccessful()){
 
-                                            mProgress.dismiss();
 
                                         } else {
 
@@ -512,7 +512,6 @@ public class Ineed extends Fragment implements UserClick {
 
                                         if(task.isSuccessful()){
 
-                                            mProgress.dismiss();
 
                                         } else {
 
@@ -532,7 +531,6 @@ public class Ineed extends Fragment implements UserClick {
 
                                         if(task.isSuccessful()){
 
-                                            mProgress.dismiss();
 
                                         } else {
 
@@ -551,7 +549,6 @@ public class Ineed extends Fragment implements UserClick {
                                     public void onComplete(@NonNull Task<Void> task) {
                                         if(task.isSuccessful()){
 
-                                            mProgress.dismiss();
 
                                         } else {
 
@@ -569,7 +566,6 @@ public class Ineed extends Fragment implements UserClick {
                                     public void onComplete(@NonNull Task<Void> task) {
                                         if(task.isSuccessful()){
 
-                                            mProgress.dismiss();
 
                                         } else {
 
