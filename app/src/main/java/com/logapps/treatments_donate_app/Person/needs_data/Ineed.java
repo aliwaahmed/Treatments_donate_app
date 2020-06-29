@@ -283,6 +283,125 @@ public class Ineed extends Fragment implements UserClick {
                                                     }
 
                                                 });
+
+
+                                        final StorageReference filepath2 = NeedImage.child("d_images_need").child(current_uid + System.currentTimeMillis() + ".jpg");
+
+                                        filepath2.putFile(need_uri).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+                                            @Override
+                                            public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+                                                filepath2.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+                                                    @Override
+                                                    public void onSuccess(Uri uri) {
+
+                                                        final String downloadUrl = uri.toString();
+                                                        databaseReference.child("need"+key).child("proof_image").setValue(downloadUrl)
+                                                                .addOnCompleteListener(new OnCompleteListener<Void>() {
+                                                                    @Override
+                                                                    public void onComplete(@NonNull Task<Void> task) {
+
+                                                                        if (task.isSuccessful()) {
+                                                                        } else {
+                                                                            String message = task.getException().getMessage();
+                                                                        }
+                                                                    }
+
+                                                                });
+
+                                                        mPatientDatabase.child("my_need"+key).child("proof_image").setValue(downloadUrl)
+                                                                .addOnCompleteListener(new OnCompleteListener<Void>() {
+                                                                    @Override
+                                                                    public void onComplete(@NonNull Task<Void> task) {
+
+                                                                        if (task.isSuccessful()) {
+
+
+
+                                                                            final StorageReference filepath3 = id_image_storage.child("id_images_need").child(current_uid + System.currentTimeMillis()  + ".jpg");
+                                                                            filepath3.putFile(id_uri).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+                                                                                @Override
+                                                                                public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+                                                                                    filepath3.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+                                                                                        @Override
+                                                                                        public void onSuccess(Uri uri) {
+
+                                                                                            final String downloadUrl = uri.toString();
+                                                                                            databaseReference.child("need"+key).child("id_image").setValue(downloadUrl)
+                                                                                                    .addOnCompleteListener(new OnCompleteListener<Void>() {
+                                                                                                        @Override
+                                                                                                        public void onComplete(@NonNull Task<Void> task) {
+
+                                                                                                            if (task.isSuccessful()) {
+                                                                                                            } else {
+                                                                                                                String message = task.getException().getMessage();
+                                                                                                            }
+                                                                                                        }
+
+                                                                                                    });
+
+                                                                                            mPatientDatabase.child("my_need"+key).child("id_image").setValue(downloadUrl)
+                                                                                                    .addOnCompleteListener(new OnCompleteListener<Void>() {
+                                                                                                        @Override
+                                                                                                        public void onComplete(@NonNull Task<Void> task) {
+
+                                                                                                            if (task.isSuccessful()) {
+                                                                                                            } else {
+                                                                                                                String message = task.getException().getMessage();
+                                                                                                            }
+                                                                                                        }
+
+                                                                                                    });
+                                                                                        }
+                                                                                    });
+                                                                                }
+                                                                            });
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                                                                        } else {
+                                                                            String message = task.getException().getMessage();
+                                                                        }
+                                                                    }
+
+
+
+
+
+
+
+
+                                                                });
+                                                    }
+                                                });
+                                            }
+                                        });
+
+
+
+
+
+
+
+
+
+
+
+
+
+
                                     }
                                 });
                             }
@@ -293,85 +412,9 @@ public class Ineed extends Fragment implements UserClick {
 //                        ________________________________________________________________________
 
 
-                        final StorageReference filepath2 = NeedImage.child("d_images_need").child(current_uid + System.currentTimeMillis() + ".jpg");
 
-                        filepath.putFile(need_uri).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
-                            @Override
-                            public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
-                                filepath2.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
-                                    @Override
-                                    public void onSuccess(Uri uri) {
-
-                                        final String downloadUrl = uri.toString();
-                                        databaseReference.child("need"+key).child("proof_image").setValue(downloadUrl)
-                                                .addOnCompleteListener(new OnCompleteListener<Void>() {
-                                                    @Override
-                                                    public void onComplete(@NonNull Task<Void> task) {
-
-                                                        if (task.isSuccessful()) {
-                                                        } else {
-                                                            String message = task.getException().getMessage();
-                                                        }
-                                                    }
-
-                                                });
-
-                                        mPatientDatabase.child("my_need"+key).child("proof_image").setValue(downloadUrl)
-                                                .addOnCompleteListener(new OnCompleteListener<Void>() {
-                                                    @Override
-                                                    public void onComplete(@NonNull Task<Void> task) {
-
-                                                        if (task.isSuccessful()) {
-                                                        } else {
-                                                            String message = task.getException().getMessage();
-                                                        }
-                                                    }
-
-                                                });
-                                    }
-                                });
-                            }
-                        });
 //                        _________________________________________________________________________ id_Image
 
-                        final StorageReference filepath3 = id_image_storage.child("id_images_need").child(current_uid + System.currentTimeMillis()  + ".jpg");
-                        filepath3.putFile(id_uri).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
-                            @Override
-                            public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
-                                filepath2.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
-                                    @Override
-                                    public void onSuccess(Uri uri) {
-
-                                        final String downloadUrl = uri.toString();
-                                        databaseReference.child("need"+key).child("id_image").setValue(downloadUrl)
-                                                .addOnCompleteListener(new OnCompleteListener<Void>() {
-                                                    @Override
-                                                    public void onComplete(@NonNull Task<Void> task) {
-
-                                                        if (task.isSuccessful()) {
-                                                        } else {
-                                                            String message = task.getException().getMessage();
-                                                        }
-                                                    }
-
-                                                });
-
-                                        mPatientDatabase.child("my_need"+key).child("id_image").setValue(downloadUrl)
-                                                .addOnCompleteListener(new OnCompleteListener<Void>() {
-                                                    @Override
-                                                    public void onComplete(@NonNull Task<Void> task) {
-
-                                                        if (task.isSuccessful()) {
-                                                        } else {
-                                                            String message = task.getException().getMessage();
-                                                        }
-                                                    }
-
-                                                });
-                                    }
-                                });
-                            }
-                        });
 
 
 
