@@ -78,11 +78,6 @@
             android:layout_marginTop="10dp"
             android:text="address"/>
 
-    <ImageView
-        android:id="@+id/_treat_img"
-        android:layout_marginTop="5dp"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
 
     <TextView
         android:layout_width="match_parent"
@@ -102,21 +97,30 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
-        android:text="Identity"/>
+        android:text="Treatment document"/>
 
-    <ImageView
-          android:id="@+id/_id_img"
-          android:layout_marginTop="5dp"
-          android:layout_width="match_parent"
-          android:layout_height="wrap_content"/>
-
+        <ImageView
+            android:id="@+id/_treat_img"
+            android:layout_marginTop="5dp"
+            android:src="@drawable/imgbg"
+            android:layout_width="300dp"
+            android:layout_gravity="center"
+            android:layout_height="300dp"/>
 
         <TextView
-            android:id="@+id/_details"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
-            android:text="details"/>
+            android:text="Identity"/>
+
+        <ImageView
+            android:id="@+id/_id_img"
+            android:layout_marginTop="5dp"
+            android:src="@drawable/imgbg"
+            android:layout_width="300dp"
+            android:layout_gravity="center"
+            android:layout_height="300dp"/>
+
     </LinearLayout>
     </ScrollView>
 
