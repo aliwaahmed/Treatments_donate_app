@@ -38,47 +38,34 @@ public class Needs_detailsActivity extends AppCompatActivity {
         _id_img=findViewById(R.id._id_img);
 
 
-        uid = FirebaseAuth.getInstance().getCurrentUser();
-        mUserDatabase = FirebaseDatabase.getInstance().getReference().child("All needs");
-
-        mUserDatabase.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+        try {
 
 
-                try {
+            String Dname  = getIntent().getStringExtra("name");
+            String tName = getIntent().getStringExtra("details");
+            String phoneN = getIntent().getStringExtra("donate_call");
+            String addresss = getIntent().getStringExtra("donate_address");
+            String getImage = getIntent().getStringExtra("t_image");
+
+            String getImage1 = getIntent().getStringExtra("id_image");
+            String getImage2 = getIntent().getStringExtra("proof_image");
+
+            Picasso.with(Needs_detailsActivity.this).load(getImage1).placeholder(R.drawable.imgbg).into(_id_img);
+            Picasso.with(Needs_detailsActivity.this).load(getImage2).placeholder(R.drawable.imgbg).into(_treat_img);
+
+            t__name.setText(Dname);
+            t__phone.setText(phoneN);
+            tr_name.setText(tName);
+            t__address.setText(addresss);
+            Picasso.with(Needs_detailsActivity.this).load(getImage).placeholder(R.drawable.imgbg).into(tr_img);
+        }
+        catch (Exception e)
+        {
+
+        }
 
 
-                String Dname  = getIntent().getStringExtra("name");
-                String tName = getIntent().getStringExtra("details");
-                String phoneN = getIntent().getStringExtra("donate_call");
-                String addresss = getIntent().getStringExtra("donate_address");
-                String getImage = getIntent().getStringExtra("t_image");
 
-                String getImage1 = getIntent().getStringExtra("id_image");
-                String getImage2 = getIntent().getStringExtra("proof_image");
-
-                Picasso.with(Needs_detailsActivity.this).load(getImage1).placeholder(R.drawable.imgbg).into(_id_img);
-                Picasso.with(Needs_detailsActivity.this).load(getImage2).placeholder(R.drawable.imgbg).into(_treat_img);
-
-                t__name.setText(Dname);
-                t__phone.setText(phoneN);
-                tr_name.setText(tName);
-                t__address.setText(addresss);
-                Picasso.with(Needs_detailsActivity.this).load(getImage).placeholder(R.drawable.imgbg).into(tr_img);
-                }
-                catch (Exception e)
-                {
-
-                }
-
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError databaseError) {
-
-            }
-        });
 
 
     }
