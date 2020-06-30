@@ -11,12 +11,13 @@ public class Ineed_class {
     private String need_expire ;
     private String get_expire_image ;
     private String id ;
-
-    public Ineed_class(String need_details, String need_name, String phone_number, String address, String need_image, String need_expire, String get_expire_image, String prof_image, String id) {
+    private String id_image ;
+    public Ineed_class(String need_details, String need_name, String phone_number, String address, String need_image, String need_expire, String get_expire_image, String prof_image, String id,String id_image) {
         this.need_details = need_details;
         this.need_name = need_name;
         this.phone_number = phone_number;
         this.address = address;
+        this.id_image=id_image;
         this.need_image = need_image;
         this.prof_image = prof_image;
         this.need_expire = need_expire;
@@ -62,6 +63,14 @@ public class Ineed_class {
 
     public void setNeed_image(String need_image) {
         this.need_image = need_image;
+    }
+
+    public String getId_image() {
+        return id_image;
+    }
+
+    public void setId_image(String id_image) {
+        this.id_image = id_image;
     }
 
     public String getNeed_expire() {

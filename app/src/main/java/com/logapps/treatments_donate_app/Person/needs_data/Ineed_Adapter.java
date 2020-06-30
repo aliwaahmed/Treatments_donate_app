@@ -88,7 +88,8 @@ public class Ineed_Adapter extends RecyclerView.Adapter<Ineed_Adapter.ViewHolder
                 i.putExtra("donate_address" , data.get(position).getAddress());
                 i.putExtra("id" , data.get(position).getId());
                 i.putExtra("t_image" , data.get(position).getNeed_image());
-                i.putExtra("t_image" , data.get(position).getNeed_image());
+                i.putExtra("proof_image" , data.get(position).getProf_image());
+                i.putExtra("id_image" , data.get(position).getId_image());
 
                 mContext.startActivity(i);
             }

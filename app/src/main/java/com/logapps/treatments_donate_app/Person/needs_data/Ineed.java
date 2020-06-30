@@ -676,16 +676,17 @@ public class Ineed extends Fragment implements UserClick {
 
                             for (DataSnapshot noteDataSnapshot : dataSnapshot.getChildren()) {
 
-                                Ineed_class feed = new Ineed_class(
+                               Ineed_class feed = new Ineed_class(
                                         noteDataSnapshot.child("name").getValue(String.class)
                                         , noteDataSnapshot.child("details").getValue(String.class)
                                         , noteDataSnapshot.child("donate_call").getValue(String.class)
                                         , noteDataSnapshot.child("donate_address").getValue(String.class) ,
                                         noteDataSnapshot.child("t_image").getValue(String.class)
-                                ,noteDataSnapshot.child("prof_image").getValue(String.class)
+                                ,noteDataSnapshot.child("phone").getValue(String.class)
                                 , noteDataSnapshot.child("address").getValue(String.class)
-                                , noteDataSnapshot.child("phone").getValue(String.class)
-                                ,noteDataSnapshot.child("id").getValue(String.class));
+                                , noteDataSnapshot.child("proof_image").getValue(String.class)
+                                ,noteDataSnapshot.child("id").getValue(String.class),
+                                        noteDataSnapshot.child("id_image").getValue(String.class));
 
                                 feeds.add(feed);
 

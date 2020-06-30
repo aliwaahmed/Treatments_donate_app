@@ -23,7 +23,7 @@ public class Needs_detailsActivity extends AppCompatActivity {
     TextView t__name , t__phone , t__address , tr_name ;
     DatabaseReference mUserDatabase ;
     FirebaseUser uid ;
-    ImageView tr_img ;
+    ImageView tr_img,_treat_img,_id_img ;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -34,7 +34,8 @@ public class Needs_detailsActivity extends AppCompatActivity {
         t__phone = findViewById(R.id.t_phone);
         tr_name = findViewById(R.id.tr_name);
         tr_img = findViewById(R.id._proof_img);
-
+        _treat_img=findViewById(R.id._treat_img);
+        _id_img=findViewById(R.id._id_img);
 
 
         uid = FirebaseAuth.getInstance().getCurrentUser();
@@ -45,20 +46,31 @@ public class Needs_detailsActivity extends AppCompatActivity {
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
 
 
+                try {
+
+
                 String Dname  = getIntent().getStringExtra("name");
                 String tName = getIntent().getStringExtra("details");
                 String phoneN = getIntent().getStringExtra("donate_call");
                 String addresss = getIntent().getStringExtra("donate_address");
                 String getImage = getIntent().getStringExtra("t_image");
 
+                String getImage1 = getIntent().getStringExtra("id_image");
+                String getImage2 = getIntent().getStringExtra("proof_image");
 
+                Picasso.with(Needs_detailsActivity.this).load(getImage1).placeholder(R.drawable.imgbg).into(_id_img);
+                Picasso.with(Needs_detailsActivity.this).load(getImage2).placeholder(R.drawable.imgbg).into(_treat_img);
 
                 t__name.setText(Dname);
                 t__phone.setText(phoneN);
                 tr_name.setText(tName);
                 t__address.setText(addresss);
                 Picasso.with(Needs_detailsActivity.this).load(getImage).placeholder(R.drawable.imgbg).into(tr_img);
+                }
+                catch (Exception e)
+                {
 
+                }
 
             }
 
