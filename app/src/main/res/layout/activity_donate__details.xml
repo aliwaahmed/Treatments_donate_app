@@ -1,0 +1,203 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:orientation="vertical"
+    android:layout_height="match_parent"
+    tools:context=".donate.data.Donate_DetailsActivity">
+
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white_blue">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal">
+            <TextView
+                android:id="@+id/tr_name"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:text="Treatment name"
+                android:fontFamily="@font/geo"
+                android:textSize="16dp"
+                android:textColor="@color/white" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="right"
+                android:layout_marginRight="20dp"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:id="@+id/back_btn"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:backgroundTint="@color/white"
+                    android:background="@drawable/ic_keyboard_arrow"/>
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+
+
+    </androidx.appcompat.widget.Toolbar>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:padding="10dp">
+
+
+            <TextView
+                android:id="@+id/t_id"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:text="id"/>
+
+            <TextView
+                android:id="@+id/ch_name"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:text="ch_name"/>
+
+
+            <TextView
+                android:id="@+id/t_name"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:text="name"/>
+
+            <TextView
+                android:id="@+id/t_phone"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:text="0101010101"/>
+
+            <TextView
+                android:id="@+id/t_address"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:text="address"/>
+
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:text="Proof"/>
+
+            <ImageView
+                android:id="@+id/_proof_img"
+                android:layout_marginTop="5dp"
+                android:src="@drawable/imgbg"
+                android:layout_width="300dp"
+                android:layout_gravity="center"
+                android:layout_height="300dp"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:text="Treatment document"/>
+
+            <ImageView
+                android:id="@+id/_treat_img"
+                android:layout_marginTop="5dp"
+                android:src="@drawable/imgbg"
+                android:layout_width="300dp"
+                android:layout_gravity="center"
+                android:layout_height="300dp"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:text="Identity"/>
+
+            <ImageView
+                android:id="@+id/_id_img"
+                android:layout_marginTop="5dp"
+                android:src="@drawable/imgbg"
+                android:layout_width="300dp"
+                android:layout_gravity="center"
+                android:layout_height="300dp"/>
+
+
+            <Button
+                android:id="@+id/accept_btn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@color/green"
+                android:backgroundTint="@color/green"
+                android:text="Accept"
+                android:textAllCaps="false"
+                android:fontFamily="@font/geo"
+                android:layout_marginTop="10dp"
+                android:layout_gravity="center"
+                android:gravity="center"
+                android:textColor="#fff"/>
+
+            <Button
+                android:id="@+id/ignore_btn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:backgroundTint="#E43C3C"
+                android:text="Ignore"
+                android:textAllCaps="false"
+                android:fontFamily="@font/geo"
+                android:layout_marginTop="10dp"
+                android:layout_gravity="center"
+                android:gravity="center"
+                android:textColor="#fff"/>
+
+            <TextView
+                android:id="@+id/accepted_txt"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:textSize="16dp"
+                android:layout_gravity="center"
+                android:visibility="gone"
+                android:gravity="center"
+                android:textColor="@color/green"
+                android:fontFamily="@font/geo"
+                android:textStyle="bold"
+                android:text="Accepted"/>
+
+            <TextView
+                android:id="@+id/ignore_txt"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:visibility="gone"
+                android:layout_gravity="center"
+                android:gravity="center"
+                android:textSize="16dp"
+                android:textColor="#F64242"
+                android:fontFamily="@font/geo"
+                android:textStyle="bold"
+                android:text="Ignored"/>
+
+        </LinearLayout>
+
+
+
+    </ScrollView>
+
+</LinearLayout>
