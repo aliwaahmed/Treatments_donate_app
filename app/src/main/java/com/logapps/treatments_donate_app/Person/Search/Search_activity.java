@@ -40,20 +40,21 @@ public class Search_activity extends AppCompatActivity implements UserClick {
     private RecyclerView mPatientsList;
     private Search_Adapter userAdapter ;
 
+    private SearchView _search_txt;
     LinearLayout linearLayout ;
 
-    EditText searchView ;
+    private    Search_class feed;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_search_activity);
 
+        _search_txt=findViewById(R.id._search_txt);
 
         mPatientsList = findViewById(R.id.search_list);
         linearLayout = findViewById(R.id.linear);
 
-        searchView = findViewById(R.id._search_txt);
 
 
         RecyclerView.LayoutManager recyce = new LinearLayoutManager(Search_activity.this , LinearLayoutManager.VERTICAL ,true);
@@ -69,13 +70,9 @@ public class Search_activity extends AppCompatActivity implements UserClick {
         //https://androidmonks.com/searchview/
 
 
-        //fetchDates();
-        fetchfeeds();
-
-    }
 
 
-    private void fetchfeeds() {
+
         String uid = mCurrentUser.getUid();
 
         DatabaseReference database = FirebaseDatabase.getInstance().getReference();
@@ -92,7 +89,7 @@ public class Search_activity extends AppCompatActivity implements UserClick {
 
                             for (DataSnapshot noteDataSnapshot : dataSnapshot.getChildren()) {
 
-                                Search_class feed = new Search_class(
+                              feed = new Search_class(
                                         noteDataSnapshot.child("name").getValue(String.class)
                                         , noteDataSnapshot.child("donate_prize").getValue(String.class)
                                         ,noteDataSnapshot.child("details").getValue(String.class)
@@ -113,7 +110,63 @@ public class Search_activity extends AppCompatActivity implements UserClick {
                     public void onCancelled(DatabaseError databaseError) {
                     }
                 });
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        _search_txt.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+
+                if(feed.getName().contains(query.toString())){
+                    userAdapter.getFilter().filter(query);
+                }else{
+                    Toast.makeText(getApplicationContext(), "No Match found",Toast.LENGTH_LONG).show();
+                }
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String newText) {
+
+                    userAdapter.getFilter().filter(newText.toString());
+
+                return false;
+            }
+
+        });
+
+
+
+
+
+
+
+
+
+
     }
+
+
 
 
 

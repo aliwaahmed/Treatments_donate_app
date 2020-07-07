@@ -56,8 +56,7 @@ public class Donate_DetailsActivity extends AppCompatActivity {
         t__address = findViewById(R.id.t_address);
         t__phone = findViewById(R.id.t_phone);
         tr_name = findViewById(R.id.tr_name);
-        ignoreTxt = findViewById(R.id.ignore_txt);
-        acceptedTxt = findViewById(R.id.accepted_txt);
+
         tr_img = findViewById(R.id._proof_img);
         _treat_img=findViewById(R.id._treat_img);
         _id_img=findViewById(R.id._id_img);
@@ -104,8 +103,16 @@ public class Donate_DetailsActivity extends AppCompatActivity {
                 @Override
                 public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
 
-                    String cha_name = dataSnapshot.child("do_name").getValue().toString();
-                    chName.setText(cha_name);
+                    try {
+                        if(dataSnapshot.child("do_name").getValue()!=null) {
+                            String cha_name = dataSnapshot.child("do_name").getValue().toString();
+                            chName.setText(cha_name);
+                        }
+                    }catch (Exception e)
+                    {
+
+                    }
+
                 }
 
                 @Override

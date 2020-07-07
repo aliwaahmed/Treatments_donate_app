@@ -1,10 +1,13 @@
 package com.logapps.treatments_donate_app.Person.Search;
 
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.Filter;
+import android.widget.Filterable;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -14,21 +17,26 @@ import com.logapps.treatments_donate_app.Person.needs_data.Ineed_class;
 import com.logapps.treatments_donate_app.Person.replace_data.UserClick;
 import com.logapps.treatments_donate_app.R;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.logging.Logger;
 
 import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
-public class Search_Adapter extends RecyclerView.Adapter<Search_Adapter.ViewHolder> {
+public class Search_Adapter extends RecyclerView.Adapter<Search_Adapter.ViewHolder>
+        implements Filterable {
 
     private Search_activity mContext;
     public List<Search_class> data = Collections.emptyList();
+    public List<Search_class> data_temp = Collections.emptyList();
+
     Search_class current;
     public String TAG = "taaaaaaaag";
     private UserClick lOnClickListener;
-
+    private List<Search_class>filteredData = null;
     public Search_Adapter(Search_activity listener){
         lOnClickListener = listener;
     }
@@ -36,6 +44,7 @@ public class Search_Adapter extends RecyclerView.Adapter<Search_Adapter.ViewHold
 
     public void setUsersData(List<Search_class> recipesIn, Search_activity search_activity ) {
         data = recipesIn;
+        data_temp=recipesIn;
         mContext = search_activity;
         notifyDataSetChanged();
     }
@@ -73,7 +82,63 @@ public class Search_Adapter extends RecyclerView.Adapter<Search_Adapter.ViewHold
         return data.size();
     }
 
+    @Override
+    public Filter getFilter() {
+        return new ItemFilter();
+    }
 
+ class ItemFilter extends Filter {
+        @Override
+        protected FilterResults performFiltering(CharSequence constraint) {
+            FilterResults results = new FilterResults();
+
+            if (constraint == null || constraint.length() == 0) {
+                results.values = data_temp;
+                results.count = data_temp.size();
+            }
+            else {
+                String filterString = constraint.toString().toLowerCase();
+
+
+                final List<Search_class> list = data;
+
+                int count = list.size();
+                final ArrayList<Search_class> nlist = new ArrayList<Search_class>(count);
+
+                String filterableString;
+
+                for (int i = 0; i < count; i++) {
+                    filterableString = list.get(i).getName();
+                    if (filterableString.toLowerCase().contains(filterString)) {
+                        nlist.add(list.get(i));
+                        Log.e("a", list.get(i).getName().toString());
+                    }
+                }
+
+
+                results.values = nlist;
+                results.count = nlist.size();
+            }
+            return results;
+        }
+
+        @SuppressWarnings("unchecked")
+        @Override
+        protected void publishResults(CharSequence constraint, FilterResults results) {
+
+            filteredData = (ArrayList<Search_class>) results.values;
+
+            data=filteredData;
+            notifyDataSetChanged();
+            if(filteredData.size()==0)
+            {
+                data=data_temp;
+                notifyDataSetChanged();
+            }
+
+        }
+
+    }
     public class ViewHolder extends RecyclerView.ViewHolder {
 
 

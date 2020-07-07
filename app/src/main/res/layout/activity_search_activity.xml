@@ -15,7 +15,7 @@
         android:background="#C6C6C6">
 
 
-        <EditText
+        <androidx.appcompat.widget.SearchView
             android:id="@+id/_search_txt"
             android:layout_width="match_parent"
             android:layout_height="40dp"

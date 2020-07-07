@@ -46,10 +46,8 @@ public class Needs_detailsActivity extends AppCompatActivity {
             String phoneN = getIntent().getStringExtra("donate_call");
             String addresss = getIntent().getStringExtra("donate_address");
             String getImage = getIntent().getStringExtra("t_image");
-
             String getImage1 = getIntent().getStringExtra("id_image");
             String getImage2 = getIntent().getStringExtra("proof_image");
-
             Picasso.with(Needs_detailsActivity.this).load(getImage1).placeholder(R.drawable.imgbg).into(_id_img);
             Picasso.with(Needs_detailsActivity.this).load(getImage2).placeholder(R.drawable.imgbg).into(_treat_img);
             Picasso.with(Needs_detailsActivity.this).load(getImage).placeholder(R.drawable.imgbg).into(tr_img);
