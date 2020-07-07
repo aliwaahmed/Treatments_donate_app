@@ -47,7 +47,7 @@ public class Search_Adapter extends RecyclerView.Adapter<Search_Adapter.ViewHold
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         Context context = parent.getContext();
 
-        int layoutIdForListItem = R.layout.needs_raw;
+        int layoutIdForListItem = R.layout.search_raw;
         LayoutInflater inflater = LayoutInflater.from(context);
         View view = inflater.inflate(layoutIdForListItem, parent, false);
 
@@ -62,7 +62,8 @@ public class Search_Adapter extends RecyclerView.Adapter<Search_Adapter.ViewHold
 
         holder1.name.setText(current.getName());
         holder1.t_name.setText(current.getTreatment_name());
-
+        holder1.price.setText(current.getPrice());
+        holder1.em.setText(current.getEm());
 
     }
 
@@ -77,7 +78,7 @@ public class Search_Adapter extends RecyclerView.Adapter<Search_Adapter.ViewHold
 
 
         CardView cardView ;
-        TextView name , t_name ;
+        TextView name , t_name  , price , em;
         ImageView imageView , t_image ;
 
 
@@ -87,6 +88,8 @@ public class Search_Adapter extends RecyclerView.Adapter<Search_Adapter.ViewHold
             cardView = (CardView)itemView.findViewById(R.id.card);
             name = (TextView)itemView.findViewById(R.id.card_name);
             t_name = (TextView)itemView.findViewById(R.id.card_t_name);
+            price = (TextView)itemView.findViewById(R.id.card_t_price);
+            em = (TextView)itemView.findViewById(R.id.card_em);
             imageView = (ImageView) itemView.findViewById(R.id.card_img);
             t_image = (ImageView)itemView.findViewById(R.id.card_t_image);
 

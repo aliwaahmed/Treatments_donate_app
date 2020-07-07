@@ -4,6 +4,15 @@
     <item
         android:id="@+id/menu_prifile"
         android:title="Profile" />
+
+    <item
+        android:id="@+id/menu_history"
+        android:title="Accepted History" />
+
+    <item
+        android:id="@+id/menu_ph_donates"
+        android:title="Pharmacies donates" />
+
     <item
         android:id="@+id/menu_logout"
         android:title="logout" />

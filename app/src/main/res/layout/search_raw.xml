@@ -10,7 +10,7 @@
         android:id="@+id/card"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:cardBackgroundColor="@color/com_facebook_button_send_background_color"
+        app:cardBackgroundColor="@color/green"
         android:layout_marginRight="10dp"
         app:cardCornerRadius="5dp"
         android:layout_marginLeft="10dp"
@@ -34,6 +34,7 @@
                     android:id="@+id/card_img"
                     android:layout_width="30dp"
                     android:layout_height="30dp"
+                    android:visibility="gone"
                     android:src="@drawable/avatar"
                     android:layout_marginLeft="5dp"/>
 
@@ -42,14 +43,13 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="Name"
-                    android:textColor="#000"
+                    android:textColor="#fff"
                     android:textSize="20dp"
                     android:textStyle="bold"
                     android:layout_marginLeft="10dp"
                     android:layout_marginTop="5dp"
                     android:fontFamily="@font/geo"/>
             </LinearLayout>
-
 
             <TextView
                 android:id="@+id/card_t_name"
@@ -58,58 +58,59 @@
                 android:text="Treatment name"
                 android:layout_marginRight="20dp"
                 android:maxLines="1"
-                android:textColor="#000"
+                android:textColor="#DADADA"
                 android:textSize="18dp"
-                android:layout_marginLeft="45dp"
+                android:layout_marginLeft="10dp"
                 android:layout_marginTop="10dp"
                 android:fontFamily="@font/geo"/>
-
-            <ImageView
-                android:id="@+id/card_t_image"
-                android:layout_width="match_parent"
-                android:layout_height="200dp"
-                android:layout_marginTop="10dp"
-                android:src="@drawable/ic_image_black_24dp"/>
-
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:layout_gravity="right"
-                android:gravity="right">
+                android:orientation="horizontal">
 
                 <TextView
-                    android:id="@+id/card_t_prize"
+                    android:id="@+id/card_t_price"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Prize"
-                    android:maxLines="1"
-                    android:textColor="#fff"
-                    android:textStyle="bold"
-                    android:textSize="18dp"
-                    android:layout_gravity="right"
-                    android:gravity="right"
+                    android:text="Treatment price"
                     android:layout_marginRight="5dp"
-                    android:layout_marginLeft="45dp"
+                    android:maxLines="1"
+                    android:textColor="#DADADA"
+                    android:textSize="18dp"
+                    android:layout_marginLeft="10dp"
                     android:layout_marginTop="10dp"
                     android:fontFamily="@font/geo"/>
 
                 <TextView
+
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="LE"
                     android:layout_marginRight="20dp"
                     android:maxLines="1"
-                    android:textColor="#fff"
                     android:textStyle="bold"
+                    android:textColor="#DADADA"
                     android:textSize="18dp"
-                    android:layout_gravity="right"
-                    android:gravity="right"
+                    android:layout_marginLeft="2dp"
                     android:layout_marginTop="10dp"
                     android:fontFamily="@font/geo"/>
 
             </LinearLayout>
+
+            <TextView
+                android:id="@+id/card_em"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Effective materisl"
+                android:layout_marginRight="20dp"
+                android:maxLines="1"
+                android:textStyle="bold"
+                android:textColor="#DADADA"
+                android:textSize="18dp"
+                android:layout_marginLeft="2dp"
+                android:layout_marginTop="10dp"
+                android:fontFamily="@font/geo"/>
 
 
         </LinearLayout>

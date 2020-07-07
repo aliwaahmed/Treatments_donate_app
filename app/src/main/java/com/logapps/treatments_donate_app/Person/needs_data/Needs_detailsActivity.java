@@ -52,21 +52,18 @@ public class Needs_detailsActivity extends AppCompatActivity {
 
             Picasso.with(Needs_detailsActivity.this).load(getImage1).placeholder(R.drawable.imgbg).into(_id_img);
             Picasso.with(Needs_detailsActivity.this).load(getImage2).placeholder(R.drawable.imgbg).into(_treat_img);
+            Picasso.with(Needs_detailsActivity.this).load(getImage).placeholder(R.drawable.imgbg).into(tr_img);
 
             t__name.setText(Dname);
             t__phone.setText(phoneN);
             tr_name.setText(tName);
             t__address.setText(addresss);
-            Picasso.with(Needs_detailsActivity.this).load(getImage).placeholder(R.drawable.imgbg).into(tr_img);
+
         }
         catch (Exception e)
         {
 
         }
-
-
-
-
 
     }
 }

@@ -1,4 +1,12 @@
-package com.logapps.treatments_donate_app.Person.replace_data;
+package com.logapps.treatments_donate_app.Pharmacy.Exc_data;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.constraintlayout.widget.ConstraintLayout;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+import de.hdodenhof.circleimageview.CircleImageView;
 
 import android.app.AlertDialog;
 import android.app.ProgressDialog;
@@ -8,9 +16,7 @@ import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -32,39 +38,26 @@ import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
 import com.logapps.treatments_donate_app.Person.Accepted.Accepted_Class;
-import com.logapps.treatments_donate_app.Person.Person_profile_activity;
 import com.logapps.treatments_donate_app.Person.Search.Search_class;
 import com.logapps.treatments_donate_app.Person.needs_data.Ineed_class;
-import com.logapps.treatments_donate_app.Pharmacy.Exc_data.ExcClass;
+import com.logapps.treatments_donate_app.Person.replace_data.Replace_adapter;
+import com.logapps.treatments_donate_app.Person.replace_data.Replace_class;
+import com.logapps.treatments_donate_app.Person.replace_data.Replacements_user;
+import com.logapps.treatments_donate_app.Person.replace_data.UserClick;
 import com.logapps.treatments_donate_app.Pharmacy.P_data.P_class;
 import com.logapps.treatments_donate_app.R;
 import com.logapps.treatments_donate_app.donate.history_data.History_class;
 import com.squareup.picasso.Callback;
 import com.squareup.picasso.NetworkPolicy;
 import com.squareup.picasso.Picasso;
-import com.theartofdev.edmodo.cropper.CropImage;
-import com.theartofdev.edmodo.cropper.CropImageView;
 
-import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.constraintlayout.widget.ConstraintLayout;
-import androidx.fragment.app.Fragment;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-import de.hdodenhof.circleimageview.CircleImageView;
-
-import static android.app.Activity.RESULT_OK;
-
-public class Replacements_user extends Fragment implements UserClick{
-
-    public Replacements_user() {
-    }
+public class Excessive_Activity extends AppCompatActivity implements UserClick {
 
     TextView textView ;
     Context context ;
@@ -79,7 +72,7 @@ public class Replacements_user extends Fragment implements UserClick{
 
     private RecyclerView mypostst;
     private String TAG = "hhhhhhhhhh";
-    private  Replace_adapter userAdapter ;
+    private ExcAdapter userAdapter ;
     ConstraintLayout constraintLayout ;
 
     private StorageReference mImageStorage;
@@ -94,73 +87,71 @@ public class Replacements_user extends Fragment implements UserClick{
 
 
     @Override
-    public View onCreateView( LayoutInflater inflater,  ViewGroup container
-            , Bundle savedInstanceState) {
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_excessive_);
 
-        final View view = inflater.inflate(R.layout.replacements_layout, container, false);
+        bottomNavigationView = findViewById(R.id.bottomNav);
+        mypostst = findViewById(R.id.exc_recycler);
 
-
-
-        bottomNavigationView = view.findViewById(R.id.bottomNav);
-        mypostst = view.findViewById(R.id.recycler);
-
-        constraintLayout = view.findViewById(R.id.constrain);
+        constraintLayout = findViewById(R.id.constrain);
 
 
         mImageStorage = FirebaseStorage.getInstance().getReference();
 
 
-        RecyclerView.LayoutManager recyce = new LinearLayoutManager(getContext(),LinearLayoutManager.VERTICAL,true);
+        RecyclerView.LayoutManager recyce = new LinearLayoutManager(Excessive_Activity.this,LinearLayoutManager.VERTICAL,true);
         mypostst.setLayoutManager(recyce);
 
         bottomNavigationView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(getContext(), "add post ...", Toast.LENGTH_SHORT).show();
+                Toast.makeText(Excessive_Activity.this, "add post ...", Toast.LENGTH_SHORT).show();
             }
         });
 
 
         mCurrentUser = FirebaseAuth.getInstance().getCurrentUser();
         final String current_uid = mCurrentUser.getUid();
-        mPatientDatabase = FirebaseDatabase.getInstance().getReference().child("All Replace").child(current_uid);
-        database =FirebaseDatabase.getInstance().getReference().child("per_Users").child(current_uid);
-        databaseReference = FirebaseDatabase.getInstance().getReference().child("Replacements");
+        mPatientDatabase = FirebaseDatabase.getInstance().getReference().child("My_exc").child(current_uid);
+        database =FirebaseDatabase.getInstance().getReference().child("ph_Users").child(current_uid);
+        databaseReference = FirebaseDatabase.getInstance().getReference().child("All_exc");
 
         fetchFeeds();
-
 
         bottomNavigationView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                final AlertDialog.Builder alert = new AlertDialog.Builder(Excessive_Activity.this);
+                final View view = getLayoutInflater().inflate(R.layout.add_donate_dialog , null);
 
-                final AlertDialog.Builder alert = new AlertDialog.Builder(view.getContext());
-                final View view = getLayoutInflater().inflate(R.layout.add_donate_dialog2 , null);
+
+
+
                 final TextView your_name = view.findViewById(R.id.d_name);
                 final TextInputEditText details = view.findViewById(R.id.details);
                 final TextInputEditText address = view.findViewById(R.id.d_address);
-                final TextInputEditText effect_mat = view.findViewById(R.id.d_em);
                 final TextInputEditText prize = view.findViewById(R.id.d_prize);
                 final TextInputEditText phone = view.findViewById(R.id.d_call);
-                final Button addDonate = view.findViewById(R.id.add_donate);
+                final Button addTreat = view.findViewById(R.id.add_donate);
                 final CircleImageView mDisplayImage = view.findViewById(R.id.image);
                 t_image = view.findViewById(R.id.dia_t_image);
-
 
                 //get image & name
                 database.addValueEventListener(new ValueEventListener() {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
 
-                        String name = dataSnapshot.child("per_name").getValue().toString();
+                        String name = dataSnapshot.child("ph_name").getValue().toString();
                         final String image = dataSnapshot.child("thumb_image").getValue().toString();
 
 
                         your_name.setText(name);
 
 
+
                         if (!image.equals("default")) {
-                            Picasso.with(getActivity()).load(image).networkPolicy(NetworkPolicy.OFFLINE)
+                            Picasso.with(getApplicationContext()).load(image).networkPolicy(NetworkPolicy.OFFLINE)
                                     .placeholder(R.drawable.avatar).into(mDisplayImage, new Callback() {
                                 @Override
                                 public void onSuccess() {
@@ -170,7 +161,7 @@ public class Replacements_user extends Fragment implements UserClick{
                                 @Override
                                 public void onError() {
 
-                                    Picasso.with(getActivity()).load(image).placeholder(R.drawable.avatar).into(mDisplayImage);
+                                    Picasso.with(getApplicationContext()).load(image).placeholder(R.drawable.avatar).into(mDisplayImage);
                                 }
                             });
                         }
@@ -197,14 +188,14 @@ public class Replacements_user extends Fragment implements UserClick{
                 dialog.show();
 
 
-
-                addDonate.setOnClickListener(new View.OnClickListener() {
+                addTreat.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
 
+                        final String currentDateTimeString = java.text.DateFormat.getDateTimeInstance().format(new Date());
+
                         String donate_details = details.getText().toString();
                         String donate_address = address.getText().toString();
-                        String donate_effect = effect_mat.getText().toString();
                         String donate_call = phone.getText().toString();
                         String donate_name = your_name.getText().toString();
                         String donate_prize = prize.getText().toString();
@@ -223,7 +214,8 @@ public class Replacements_user extends Fragment implements UserClick{
                         Map mParent = new HashMap();
                         mPatientDatabase.push().setValue(mParent);
 
-                        final StorageReference filepath = mImageStorage.child("d_images").child(current_uid + System.currentTimeMillis() + ".jpg");
+
+                        final StorageReference filepath = mImageStorage.child("exc_images").child(current_uid + System.currentTimeMillis() + ".jpg");
 
                         filepath.putFile(resultUri).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
                             @Override
@@ -234,7 +226,7 @@ public class Replacements_user extends Fragment implements UserClick{
 
                                         final String downloadUrl = uri.toString();
 
-                                        mPatientDatabase.child("my_replace"+key).child("t_image").setValue(downloadUrl)
+                                        mPatientDatabase.child("my_exc"+key).child("exc_image").setValue(downloadUrl)
                                                 .addOnCompleteListener(new OnCompleteListener<Void>() {
                                                     @Override
                                                     public void onComplete(@NonNull Task<Void> task) {
@@ -247,54 +239,7 @@ public class Replacements_user extends Fragment implements UserClick{
 
                                                 });
 
-                                        databaseReference.child("replace"+key).child("t_image").setValue(downloadUrl)
-                                                .addOnCompleteListener(new OnCompleteListener<Void>() {
-                                                    @Override
-                                                    public void onComplete(@NonNull Task<Void> task) {
-
-                                                        if (task.isSuccessful()) {
-                                                        } else {
-                                                            String message = task.getException().getMessage();
-                                                        }
-                                                    }
-
-                                                });
-
-                                    }
-                                });
-                            }
-                        });
-
-
-
-                        //profile image
-
-
-                        final StorageReference filepath2 = mImageStorage.child("profile_images").child(current_uid + ".jpg");
-
-                        filepath2.putFile(resultUri).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
-                            @Override
-                            public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
-                                filepath.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
-                                    @Override
-                                    public void onSuccess(Uri uri) {
-
-                                        final String downloadUrl = uri.toString();
-
-                                        mPatientDatabase.child("my_replace"+key).child("profile_image").setValue(downloadUrl)
-                                                .addOnCompleteListener(new OnCompleteListener<Void>() {
-                                                    @Override
-                                                    public void onComplete(@NonNull Task<Void> task) {
-
-                                                        if (task.isSuccessful()) {
-                                                        } else {
-                                                            String message = task.getException().getMessage();
-                                                        }
-                                                    }
-
-                                                });
-
-                                        databaseReference.child("replace"+key).child("profile_image").setValue(downloadUrl)
+                                        databaseReference.child("exc"+key).child("exc_image").setValue(downloadUrl)
                                                 .addOnCompleteListener(new OnCompleteListener<Void>() {
                                                     @Override
                                                     public void onComplete(@NonNull Task<Void> task) {
@@ -312,11 +257,9 @@ public class Replacements_user extends Fragment implements UserClick{
                             }
                         });
 
-
-//                        _____________________
 
                         //add name one
-                        mPatientDatabase.child("my_replace"+key).child("name")
+                        mPatientDatabase.child("my_exc"+key).child("name")
                                 .setValue(donate_name)
                                 .addOnCompleteListener(new OnCompleteListener<Void>() {
                                     @Override
@@ -335,7 +278,7 @@ public class Replacements_user extends Fragment implements UserClick{
                                     }
                                 });
                         //add name two
-                        databaseReference.child("replace"+key).child("name")
+                        databaseReference.child("exc"+key).child("name")
                                 .setValue(donate_name)
                                 .addOnCompleteListener(new OnCompleteListener<Void>() {
                                     @Override
@@ -355,73 +298,10 @@ public class Replacements_user extends Fragment implements UserClick{
                                 });
 
                         //____________________________________________
-
-
-
-
-
-                        //add name one
-                        mPatientDatabase.child("my_replace"+key).child("em")
-                                .setValue(donate_effect)
-                                .addOnCompleteListener(new OnCompleteListener<Void>() {
-                                    @Override
-                                    public void onComplete(@NonNull Task<Void> task) {
-
-                                        if(task.isSuccessful()){
-
-                                            mProgress.dismiss();
-
-                                        } else {
-
-                                            Toast.makeText(view.getContext(), "error", Toast.LENGTH_SHORT).show();
-
-                                        }
-
-                                    }
-                                });
-                        //add name two
-                        databaseReference.child("replace"+key).child("em")
-                                .setValue(donate_effect)
-                                .addOnCompleteListener(new OnCompleteListener<Void>() {
-                                    @Override
-                                    public void onComplete(@NonNull Task<Void> task) {
-
-                                        if(task.isSuccessful()){
-
-                                            mProgress.dismiss();
-
-                                        } else {
-
-                                            Toast.makeText(view.getContext(), "error", Toast.LENGTH_SHORT).show();
-
-                                        }
-
-                                    }
-                                });
-
-                        //____________________________________________
-
-
-
-//                        mPatientDatabase.child("my_replace"+key).child("t_image").setValue("default")
-//                                .addOnCompleteListener(new OnCompleteListener<Void>() {
-//                                    @Override
-//                                    public void onComplete(@NonNull Task<Void> task) {
-//
-//                                    }
-//                                });
-//
-//                        databaseReference.child("replace"+key).child("t_image").setValue("default")
-//                                .addOnCompleteListener(new OnCompleteListener<Void>() {
-//                                    @Override
-//                                    public void onComplete(@NonNull Task<Void> task) {
-//
-//                                    }
-//                                });
                         //____________________________________________
 
                         //add details one
-                        mPatientDatabase.child("my_replace"+key).child("details")
+                        mPatientDatabase.child("my_exc"+key).child("details")
                                 .setValue(donate_details)
                                 .addOnCompleteListener(new OnCompleteListener<Void>() {
                                     @Override
@@ -442,7 +322,7 @@ public class Replacements_user extends Fragment implements UserClick{
 
 
                         //add details two
-                        databaseReference.child("replace"+key).child("details")
+                        databaseReference.child("exc"+key).child("details")
                                 .setValue(donate_details)
                                 .addOnCompleteListener(new OnCompleteListener<Void>() {
                                     @Override
@@ -461,8 +341,53 @@ public class Replacements_user extends Fragment implements UserClick{
                                     }
                                 });
 
+                        //add time
+
+
+                        mPatientDatabase.child("my_exc"+key).child("date")
+                                .setValue(currentDateTimeString)
+                                .addOnCompleteListener(new OnCompleteListener<Void>() {
+                                    @Override
+                                    public void onComplete(@NonNull Task<Void> task) {
+
+                                        if(task.isSuccessful()){
+
+                                            mProgress.dismiss();
+
+                                        } else {
+
+                                            Toast.makeText(view.getContext(), "error", Toast.LENGTH_SHORT).show();
+
+                                        }
+
+                                    }
+                                });
+
+
+                        //add details two
+                        databaseReference.child("exc"+key).child("date")
+                                .setValue(currentDateTimeString)
+                                .addOnCompleteListener(new OnCompleteListener<Void>() {
+                                    @Override
+                                    public void onComplete(@NonNull Task<Void> task) {
+
+                                        if(task.isSuccessful()){
+
+                                            mProgress.dismiss();
+
+                                        } else {
+
+                                            Toast.makeText(view.getContext(), "error", Toast.LENGTH_SHORT).show();
+
+                                        }
+
+                                    }
+                                });
+
+                        //_________________
+
                         //add address one
-                        mPatientDatabase.child("my_replace"+key).child("donate_address")
+                        mPatientDatabase.child("my_exc"+key).child("donate_address")
                                 .setValue(donate_address)
                                 .addOnCompleteListener(new OnCompleteListener<Void>() {
                                     @Override
@@ -482,7 +407,7 @@ public class Replacements_user extends Fragment implements UserClick{
                                 });
 
                         //add address two
-                        databaseReference.child("replace"+key).child("donate_address")
+                        databaseReference.child("exc"+key).child("donate_address")
                                 .setValue(donate_address)
                                 .addOnCompleteListener(new OnCompleteListener<Void>() {
                                     @Override
@@ -503,7 +428,7 @@ public class Replacements_user extends Fragment implements UserClick{
 
 
                         //add phone number one
-                        mPatientDatabase.child("my_replace"+key).child("donate_call").setValue(donate_call)
+                        mPatientDatabase.child("my_exc"+key).child("donate_call").setValue(donate_call)
                                 .addOnCompleteListener(new OnCompleteListener<Void>() {
                                     @Override
                                     public void onComplete(@NonNull Task<Void> task) {
@@ -521,7 +446,7 @@ public class Replacements_user extends Fragment implements UserClick{
 
                         //prize
 
-                        databaseReference.child("replace"+key).child("donate_prize")
+                        databaseReference.child("exc"+key).child("donate_prize")
                                 .setValue(donate_prize)
                                 .addOnCompleteListener(new OnCompleteListener<Void>() {
                                     @Override
@@ -542,7 +467,7 @@ public class Replacements_user extends Fragment implements UserClick{
 
 
                         //add phone number one
-                        mPatientDatabase.child("my_replace"+key).child("donate_prize").setValue(donate_prize)
+                        mPatientDatabase.child("my_exc"+key).child("donate_prize").setValue(donate_prize)
                                 .addOnCompleteListener(new OnCompleteListener<Void>() {
                                     @Override
                                     public void onComplete(@NonNull Task<Void> task) {
@@ -565,7 +490,7 @@ public class Replacements_user extends Fragment implements UserClick{
                         //_______________________________
 
                         //add phone number two
-                        databaseReference.child("replace"+key).child("donate_call").setValue(donate_call)
+                        databaseReference.child("exc"+key).child("donate_call").setValue(donate_call)
                                 .addOnCompleteListener(new OnCompleteListener<Void>() {
                                     @Override
                                     public void onComplete(@NonNull Task<Void> task) {
@@ -582,12 +507,13 @@ public class Replacements_user extends Fragment implements UserClick{
                                 });
 
                         dialog.dismiss();
+
+
                     }
                 });
             }
         });
 
-        return view ;
     }
 
     private void pickImage() {
@@ -604,6 +530,7 @@ public class Replacements_user extends Fragment implements UserClick{
 
         startActivityForResult(chooserIntent, GALLERY_PICK);
 
+
     }
 
     @Override
@@ -617,7 +544,7 @@ public class Replacements_user extends Fragment implements UserClick{
 
             try {
 
-                Bitmap bitmap = MediaStore.Images.Media.getBitmap(getActivity().getApplicationContext().getContentResolver(), imageUri);
+                Bitmap bitmap = MediaStore.Images.Media.getBitmap(getApplicationContext().getApplicationContext().getContentResolver(), imageUri);
 
                 t_image.setImageBitmap(bitmap);
 
@@ -629,40 +556,37 @@ public class Replacements_user extends Fragment implements UserClick{
         }
     }
 
-
-
-    public void fetchFeeds() {
+    private void fetchFeeds() {
 
         String uid = mCurrentUser.getUid();
 
         DatabaseReference database = FirebaseDatabase.getInstance().getReference();
 
 
-        database.child("All Replace").child(uid)
+
+        database.child("My_exc").child(uid)
 
                 .addValueEventListener(new ValueEventListener() {
                     @Override
                     public void onDataChange(DataSnapshot dataSnapshot) {
                         if (dataSnapshot != null) {
 
-                            final ArrayList<Replace_class> feeds = new ArrayList<>();
+                            final ArrayList<ExcClass> feeds = new ArrayList<>();
 
                             for (DataSnapshot noteDataSnapshot : dataSnapshot.getChildren()) {
 
-                                Replace_class feed = new Replace_class(
-                                        noteDataSnapshot.child("name").getValue(String.class)
-                                        , noteDataSnapshot.child("details").getValue(String.class)
-                                        , noteDataSnapshot.child("t_image").getValue(String.class)
-                                        , noteDataSnapshot.child("ex_date").getValue(String.class) ,
+                                ExcClass feed = new ExcClass(
                                         noteDataSnapshot.child("donate_prize").getValue(String.class)
-                                , noteDataSnapshot.child("ex_image").getValue(String.class)
-                                        , noteDataSnapshot.child("em").getValue(String.class));
+                                        , noteDataSnapshot.child("donate_prize").getValue(String.class)
+                                        , noteDataSnapshot.child("details").getValue(String.class)
+                                        , noteDataSnapshot.child("date").getValue(String.class) ,
+                                        noteDataSnapshot.child("details").getValue(String.class));
 
                                 feeds.add(feed);
 
                             }
-                            userAdapter = new Replace_adapter(Replacements_user.this);
-                            userAdapter.setUsersData(feeds, Replacements_user.this);
+                            userAdapter = new ExcAdapter(Excessive_Activity.this);
+                            userAdapter.setUsersData(feeds, Excessive_Activity.this);
                             mypostst.setAdapter(userAdapter);
                         }
                     }
@@ -670,6 +594,7 @@ public class Replacements_user extends Fragment implements UserClick{
                     public void onCancelled(DatabaseError databaseError) {
                     }
                 });
+
     }
 
     @Override
@@ -704,6 +629,11 @@ public class Replacements_user extends Fragment implements UserClick{
 
     @Override
     public void asd(ExcClass excClass) {
+
+    }
+
+    @Override
+    public void onPointerCaptureChanged(boolean hasCapture) {
 
     }
 }

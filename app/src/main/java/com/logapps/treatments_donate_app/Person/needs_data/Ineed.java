@@ -33,13 +33,16 @@ import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
+import com.logapps.treatments_donate_app.Person.Accepted.Accepted_Class;
 import com.logapps.treatments_donate_app.Person.Search.Search_class;
 import com.logapps.treatments_donate_app.Person.replace_data.Replace_adapter;
 import com.logapps.treatments_donate_app.Person.replace_data.Replace_class;
 import com.logapps.treatments_donate_app.Person.replace_data.Replacements_user;
 import com.logapps.treatments_donate_app.Person.replace_data.UserClick;
+import com.logapps.treatments_donate_app.Pharmacy.Exc_data.ExcClass;
 import com.logapps.treatments_donate_app.Pharmacy.P_data.P_class;
 import com.logapps.treatments_donate_app.R;
+import com.logapps.treatments_donate_app.donate.history_data.History_class;
 import com.squareup.picasso.Callback;
 import com.squareup.picasso.NetworkPolicy;
 import com.squareup.picasso.Picasso;
@@ -80,7 +83,7 @@ public class Ineed extends Fragment implements UserClick {
 
     BottomNavigationView bottomNavigationView ;
 
-    private DatabaseReference mPatientDatabase , database;
+    private DatabaseReference mPatientDatabase , database , id_database;
     private DatabaseReference databaseReference ;
     private FirebaseUser mCurrentUser , userId;
     private static final int GALLERY_PICK = 1;
@@ -133,6 +136,9 @@ public class Ineed extends Fragment implements UserClick {
         database =FirebaseDatabase.getInstance().getReference().child("per_Users").child(current_uid);
         databaseReference = FirebaseDatabase.getInstance().getReference().child("needs");
 
+        //id database
+        id_database = FirebaseDatabase.getInstance().getReference().child("per_Users");
+
         fetchFeeds();
 
         bottomNavigationView.setOnClickListener(new View.OnClickListener() {
@@ -151,6 +157,20 @@ public class Ineed extends Fragment implements UserClick {
                 proofImage = view.findViewById(R.id.proof_t_image);
                 id_image = view.findViewById(R.id.id_t_image);
 
+                id_database.addValueEventListener(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+
+                //        Toast.makeText(view.getContext(), "id is " + current_uid, Toast.LENGTH_LONG).show();
+
+                    }
+
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                    }
+                });
+
 
 
                 database.addValueEventListener(new ValueEventListener() {
@@ -161,6 +181,7 @@ public class Ineed extends Fragment implements UserClick {
 
                         String name = dataSnapshot.child("per_name").getValue().toString();
                         final String image = dataSnapshot.child("thumb_image").getValue().toString();
+
 
 
                         your_name.setText(name);
@@ -424,6 +445,47 @@ public class Ineed extends Fragment implements UserClick {
 
 //                        ___________________________________________________________________________
 
+
+                        //add my id
+
+                        //add id one
+                        mPatientDatabase.child("my_need"+key).child("id")
+                                .setValue(current_uid)
+                                .addOnCompleteListener(new OnCompleteListener<Void>() {
+                                    @Override
+                                    public void onComplete(@NonNull Task<Void> task) {
+
+                                        if(task.isSuccessful()){
+
+
+                                        } else {
+
+                                            Toast.makeText(view.getContext(), "error", Toast.LENGTH_SHORT).show();
+
+                                        }
+
+                                    }
+                                });
+
+                        //add id two
+                        databaseReference.child("need"+key).child("id")
+                                .setValue(current_uid)
+                                .addOnCompleteListener(new OnCompleteListener<Void>() {
+                                    @Override
+                                    public void onComplete(@NonNull Task<Void> task) {
+
+                                        if(task.isSuccessful()){
+
+
+                                        } else {
+
+                                            Toast.makeText(view.getContext(), "error", Toast.LENGTH_SHORT).show();
+
+                                        }
+
+                                    }
+                                });
+                        //___________________________
 
 
 
@@ -720,6 +782,21 @@ public class Ineed extends Fragment implements UserClick {
 
     @Override
     public void asd(P_class p_class) {
+
+    }
+
+    @Override
+    public void asd(History_class historyClass) {
+
+    }
+
+    @Override
+    public void asd(Accepted_Class accepted_class) {
+
+    }
+
+    @Override
+    public void asd(ExcClass excClass) {
 
     }
 }

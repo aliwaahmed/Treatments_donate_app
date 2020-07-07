@@ -7,14 +7,16 @@ public class Replace_class {
     private String t_expire ;
     private String prize ;
     private String getT_expire_image ;
+    private String effective ;
 
-    public Replace_class(String t_name, String t_details, String t_image, String t_expire, String prize, String getT_expire_image) {
+    public Replace_class(String t_name, String t_details, String t_image, String t_expire, String prize, String getT_expire_image, String effective) {
         this.t_name = t_name;
         this.t_details = t_details;
         this.t_image = t_image;
         this.t_expire = t_expire;
         this.prize = prize;
         this.getT_expire_image = getT_expire_image;
+        this.effective = effective;
     }
 
     public String getT_name() {
@@ -65,6 +67,14 @@ public class Replace_class {
         this.getT_expire_image = getT_expire_image;
     }
 
+    public String getEffective() {
+        return effective;
+    }
+
+    public void setEffective(String effective) {
+        this.effective = effective;
+    }
+
     @Override
     public String toString() {
         return "Replace_class{" +
@@ -74,6 +84,7 @@ public class Replace_class {
                 ", t_expire='" + t_expire + '\'' +
                 ", prize='" + prize + '\'' +
                 ", getT_expire_image='" + getT_expire_image + '\'' +
+                ", effective='" + effective + '\'' +
                 '}';
     }
 }

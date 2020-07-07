@@ -63,6 +63,7 @@ public class Ph_register_activity extends AppCompatActivity {
         mAuth = FirebaseAuth.getInstance();
 
 
+        //press on back button
         back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

@@ -20,6 +20,7 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.storage.StorageReference;
+import com.logapps.treatments_donate_app.Person.Accepted.Accepted_Class;
 import com.logapps.treatments_donate_app.Person.Person_home_activity;
 import com.logapps.treatments_donate_app.Person.Person_login_activity;
 import com.logapps.treatments_donate_app.Person.Search.Search_class;
@@ -28,10 +29,14 @@ import com.logapps.treatments_donate_app.Person.needs_data.Ineed_Adapter;
 import com.logapps.treatments_donate_app.Person.needs_data.Ineed_class;
 import com.logapps.treatments_donate_app.Person.replace_data.Replace_class;
 import com.logapps.treatments_donate_app.Person.replace_data.UserClick;
+import com.logapps.treatments_donate_app.Pharmacy.Exc_data.ExcClass;
 import com.logapps.treatments_donate_app.Pharmacy.P_data.P_class;
 import com.logapps.treatments_donate_app.R;
 import com.logapps.treatments_donate_app.donate.data.All_needs_Adapter;
 import com.logapps.treatments_donate_app.donate.data.All_needs_class;
+import com.logapps.treatments_donate_app.donate.history_data.DonateHistoryActivity;
+import com.logapps.treatments_donate_app.donate.history_data.History_class;
+import com.logapps.treatments_donate_app.donate.ph_donates.Ph_DonatesActivity;
 
 import java.util.ArrayList;
 
@@ -66,7 +71,6 @@ public class Donate_home_activity extends AppCompatActivity implements UserClick
 
         fetchFeeds();
 
-
         setSupportActionBar(mToolbar);
         getSupportActionBar().setDisplayShowTitleEnabled(false);
 
@@ -94,10 +98,14 @@ public class Donate_home_activity extends AppCompatActivity implements UserClick
                                 All_needs_class feed = new All_needs_class(
                                         noteDataSnapshot.child("name").getValue(String.class)
                                         , noteDataSnapshot.child("details").getValue(String.class)
-                                        , noteDataSnapshot.child("t_image").getValue(String.class)
-                                        , noteDataSnapshot.child("ex_date").getValue(String.class) ,
-                                        noteDataSnapshot.child("ex_image").getValue(String.class)
-                                        ,noteDataSnapshot.child("prof_image").getValue(String.class));
+                                        , noteDataSnapshot.child("donate_call").getValue(String.class)
+                                        , noteDataSnapshot.child("donate_address").getValue(String.class) ,
+                                        noteDataSnapshot.child("t_image").getValue(String.class)
+                                        ,noteDataSnapshot.child("phone").getValue(String.class)
+                                        , noteDataSnapshot.child("address").getValue(String.class)
+                                        , noteDataSnapshot.child("proof_image").getValue(String.class)
+                                        ,noteDataSnapshot.child("id").getValue(String.class),
+                                        noteDataSnapshot.child("id_image").getValue(String.class));
 
                                 feeds.add(feed);
 
@@ -125,7 +133,10 @@ public class Donate_home_activity extends AppCompatActivity implements UserClick
         super.onOptionsItemSelected(item);
 
         if (item.getItemId() == R.id.menu_prifile){
-            Toast.makeText(this, "profile ...", Toast.LENGTH_SHORT).show();
+            Intent i = new Intent(Donate_home_activity.this , DonateProfileActivity.class);
+            i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+            startActivity(i);
+
 
         } else if (item.getItemId() == R.id.menu_logout) {
 
@@ -134,6 +145,23 @@ public class Donate_home_activity extends AppCompatActivity implements UserClick
             startActivity(i);
 
         }
+
+        else if (item.getItemId() == R.id.menu_history) {
+
+            Intent i = new Intent(Donate_home_activity.this , DonateHistoryActivity.class);
+            i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+            startActivity(i);
+
+        }
+
+        else if (item.getItemId() == R.id.menu_ph_donates) {
+
+            Intent i = new Intent(Donate_home_activity.this , Ph_DonatesActivity.class);
+            i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+            startActivity(i);
+
+        }
+
 
         return true ;
     }
@@ -155,6 +183,21 @@ public class Donate_home_activity extends AppCompatActivity implements UserClick
 
     @Override
     public void asd(P_class p_class) {
+
+    }
+
+    @Override
+    public void asd(History_class historyClass) {
+
+    }
+
+    @Override
+    public void asd(Accepted_Class accepted_class) {
+
+    }
+
+    @Override
+    public void asd(ExcClass excClass) {
 
     }
 }

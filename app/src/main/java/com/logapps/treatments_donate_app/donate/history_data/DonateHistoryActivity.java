@@ -1,6 +1,5 @@
-package com.logapps.treatments_donate_app.Pharmacy;
+package com.logapps.treatments_donate_app.donate.history_data;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -8,11 +7,8 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
-import android.widget.Button;
-import android.widget.Toast;
+import android.widget.ImageView;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -28,56 +24,52 @@ import com.logapps.treatments_donate_app.Person.needs_data.Ineed_class;
 import com.logapps.treatments_donate_app.Person.replace_data.Replace_class;
 import com.logapps.treatments_donate_app.Person.replace_data.UserClick;
 import com.logapps.treatments_donate_app.Pharmacy.Exc_data.ExcClass;
-import com.logapps.treatments_donate_app.Pharmacy.Exc_data.Excessive_Activity;
-import com.logapps.treatments_donate_app.Pharmacy.P_data.P_Adapter;
 import com.logapps.treatments_donate_app.Pharmacy.P_data.P_class;
 import com.logapps.treatments_donate_app.R;
-import com.logapps.treatments_donate_app.donate.history_data.History_class;
+import com.logapps.treatments_donate_app.donate.Donate_home_activity;
+import com.logapps.treatments_donate_app.donate.data.All_needs_Adapter;
+import com.logapps.treatments_donate_app.donate.data.All_needs_class;
+import com.logapps.treatments_donate_app.donate.data.Donate_DetailsActivity;
 
 import java.util.ArrayList;
 
-public class Ph_home_activity extends AppCompatActivity implements UserClick {
+public class DonateHistoryActivity extends AppCompatActivity implements UserClick {
 
-    //variables
     private Toolbar mToolbar ;
-    private RecyclerView needs_list;
+    private RecyclerView history_list;
+    private ImageView backbtn ;
     private DatabaseReference mPatientDatabase , database;
     private DatabaseReference databaseReference ;
     private FirebaseUser mCurrentUser , userId;
     private StorageReference mImageStorage;
-    private P_Adapter userAdapter ;
+    private HistoryAdapter userAdapter ;
 
-    Button logout ;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_ph_home);
+        setContentView(R.layout.activity_donate_history);
 
-        logout = findViewById(R.id._logout);
+        mToolbar = findViewById(R.id.toolbar);
+        backbtn = findViewById(R.id.back_btn);
+        history_list = findViewById(R.id.history_recycler);
 
-        //just for test .. don't delete !!!!
-
-        logout.setOnClickListener(new View.OnClickListener() {
+        backbtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent i = new Intent(Ph_home_activity.this , Ph_login_activity.class);
+                Intent i = new Intent(DonateHistoryActivity.this , Donate_home_activity.class);
                 i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                 startActivity(i);
             }
         });
 
-
-        mToolbar = findViewById(R.id.toolbar);
-        needs_list = findViewById(R.id._needs_list);
-
-
-        //make sure that the list is vertical
         RecyclerView.LayoutManager recyce = new LinearLayoutManager(getApplicationContext(),LinearLayoutManager.VERTICAL,true);
-        needs_list.setLayoutManager(recyce);
+        history_list.setLayoutManager(recyce);
 
 
         mCurrentUser = FirebaseAuth.getInstance().getCurrentUser();
         final String current_uid = mCurrentUser.getUid();
+
         mPatientDatabase = FirebaseDatabase.getInstance().getReference().child("All Replace").child(current_uid);
         database =FirebaseDatabase.getInstance().getReference().child("per_Users").child(current_uid);
         databaseReference = FirebaseDatabase.getInstance().getReference().child("Replacements");
@@ -88,83 +80,41 @@ public class Ph_home_activity extends AppCompatActivity implements UserClick {
         setSupportActionBar(mToolbar);
         getSupportActionBar().setDisplayShowTitleEnabled(false);
 
-
     }
 
     private void fetchFeeds() {
 
         String uid = mCurrentUser.getUid();
-
         DatabaseReference database = FirebaseDatabase.getInstance().getReference();
 
-        database.child("Replacements")
+        database.child("History").child(uid)
 
                 .addValueEventListener(new ValueEventListener() {
                     @Override
                     public void onDataChange(DataSnapshot dataSnapshot) {
                         if (dataSnapshot != null) {
 
-                            final ArrayList<P_class> feeds = new ArrayList<>();
+                            final ArrayList<History_class> feeds = new ArrayList<>();
 
                             for (DataSnapshot noteDataSnapshot : dataSnapshot.getChildren()) {
 
-                                P_class feed = new P_class(
+                                History_class feed = new History_class(
                                         noteDataSnapshot.child("name").getValue(String.class)
-                                        , noteDataSnapshot.child("details").getValue(String.class)
-                                        , noteDataSnapshot.child("t_image").getValue(String.class)
-                                        , noteDataSnapshot.child("ex_date").getValue(String.class) ,
-                                        noteDataSnapshot.child("ex_image").getValue(String.class)
-                                        );
+                                        , noteDataSnapshot.child("time").getValue(String.class));
 
                                 feeds.add(feed);
 
                             }
-                            userAdapter = new P_Adapter(Ph_home_activity.this);
-                            userAdapter.setUsersData(feeds, Ph_home_activity.this);
-                            needs_list.setAdapter(userAdapter);
+                            userAdapter = new HistoryAdapter(DonateHistoryActivity.this);
+                            userAdapter.setUsersData(feeds, DonateHistoryActivity.this);
+                            history_list.setAdapter(userAdapter);
                         }
                     }
                     @Override
                     public void onCancelled(DatabaseError databaseError) {
                     }
                 });
-
     }
-
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        super.onCreateOptionsMenu(menu);
-        getMenuInflater().inflate(R.menu.pharmacy_menu , menu);
-        return true ;
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
-        super.onOptionsItemSelected(item);
-
-        if (item.getItemId() == R.id.menu_prifile){
-            Intent i = new Intent(Ph_home_activity.this , Ph_profile_activity.class);
-            i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-            startActivity(i);
-
-        } else if (item.getItemId() == R.id.menu_logout) {
-
-            Intent i = new Intent(Ph_home_activity.this , Ph_login_activity.class);
-            i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-            startActivity(i);
-
-        }
-        else if (item.getItemId() == R.id._excessive) {
-
-            Intent i = new Intent(Ph_home_activity.this , Excessive_Activity.class);
-            i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-            startActivity(i);
-
-        }
-
-        return true ;
-    }
-
 
     @Override
     public void asd(Replace_class replace_class) {
@@ -198,11 +148,6 @@ public class Ph_home_activity extends AppCompatActivity implements UserClick {
 
     @Override
     public void asd(ExcClass excClass) {
-
-    }
-
-    @Override
-    public void onPointerCaptureChanged(boolean hasCapture) {
 
     }
 }

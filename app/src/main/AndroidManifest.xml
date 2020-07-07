@@ -15,7 +15,16 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".Person.needs_data.Needs_detailsActivity"></activity>
+        <activity android:name=".donate.ph_donates.Ph_Donates_Details_Activity"></activity>
+        <activity android:name=".Pharmacy.Ph_profile_activity" />
+        <activity android:name=".donate.ph_donates.Ph_DonatesActivity" />
+        <activity android:name=".Pharmacy.Exc_data.Excessive_Activity" />
+        <activity android:name=".Person.replace_data.ReplaceDetails_Activity" />
+        <activity android:name=".Pharmacy.Ph_Details_activity" />
+        <activity android:name=".donate.history_data.DonateHistoryActivity" />
+        <activity android:name=".donate.DonateProfileActivity" />
+        <activity android:name=".donate.data.Donate_DetailsActivity" />
+        <activity android:name=".Person.needs_data.Needs_detailsActivity" />
         <activity android:name=".Person.Search.Search_activity" />
         <activity android:name=".Person.Person_profile_activity" />
         <activity android:name=".donate.Donate_home_activity" />

@@ -1,5 +1,6 @@
 package com.logapps.treatments_donate_app.Person;
 
+import com.logapps.treatments_donate_app.Person.Accepted.Accepted;
 import com.logapps.treatments_donate_app.Person.needs_data.Ineed;
 import com.logapps.treatments_donate_app.Person.replace_data.Replacements_user;
 
@@ -26,6 +27,9 @@ class SerctionPagerAdapter extends FragmentPagerAdapter {
             case 2:
                 Accepted accepted = new Accepted();
                 return accepted ;
+            case 3:
+                Exchanges exchanges = new Exchanges();
+                return exchanges ;
             default:
                 return null ;
         }
@@ -37,14 +41,16 @@ class SerctionPagerAdapter extends FragmentPagerAdapter {
     }
 
 
+
     public CharSequence getPageTitle(int position){
         switch (position){
             case 0:
-                return "Replacement";
+                return "Replace";
             case 1:
                 return "I need";
             case 2 :
-                return "Accepted";
+                return "Accept";
+          
             default:
                 return null;
 
