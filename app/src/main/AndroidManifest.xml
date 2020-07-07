@@ -15,7 +15,10 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".donate.ph_donates.Ph_Donates_Details_Activity"></activity>
+        <activity android:name=".Pharmacy.Ph_CoronaActivity"></activity>
+        <activity android:name=".Person.PersonCoronaActivity" />
+        <activity android:name=".donate.DonateCoronaActivity" />
+        <activity android:name=".donate.ph_donates.Ph_Donates_Details_Activity" />
         <activity android:name=".Pharmacy.Ph_profile_activity" />
         <activity android:name=".donate.ph_donates.Ph_DonatesActivity" />
         <activity android:name=".Pharmacy.Exc_data.Excessive_Activity" />

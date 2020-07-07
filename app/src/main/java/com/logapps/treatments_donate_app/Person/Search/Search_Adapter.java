@@ -16,6 +16,7 @@ import com.logapps.treatments_donate_app.Person.needs_data.Ineed_Adapter;
 import com.logapps.treatments_donate_app.Person.needs_data.Ineed_class;
 import com.logapps.treatments_donate_app.Person.replace_data.UserClick;
 import com.logapps.treatments_donate_app.R;
+import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -73,6 +74,7 @@ public class Search_Adapter extends RecyclerView.Adapter<Search_Adapter.ViewHold
         holder1.t_name.setText(current.getTreatment_name());
         holder1.price.setText(current.getPrice());
         holder1.em.setText(current.getEm());
+        Picasso.with(mContext.getApplicationContext()).load(current.getImage()).into(holder.t_image);
 
     }
 
@@ -108,10 +110,10 @@ public class Search_Adapter extends RecyclerView.Adapter<Search_Adapter.ViewHold
                 String filterableString;
 
                 for (int i = 0; i < count; i++) {
-                    filterableString = list.get(i).getName();
+                    filterableString = list.get(i).getEm();
                     if (filterableString.toLowerCase().contains(filterString)) {
                         nlist.add(list.get(i));
-                        Log.e("a", list.get(i).getName().toString());
+                        Log.e("a", list.get(i).getEm().toString());
                     }
                 }
 
@@ -156,7 +158,7 @@ public class Search_Adapter extends RecyclerView.Adapter<Search_Adapter.ViewHold
             price = (TextView)itemView.findViewById(R.id.card_t_price);
             em = (TextView)itemView.findViewById(R.id.card_em);
             imageView = (ImageView) itemView.findViewById(R.id.card_img);
-            t_image = (ImageView)itemView.findViewById(R.id.card_t_image);
+            t_image = (ImageView)itemView.findViewById(R.id.search_img);
 
 
         }

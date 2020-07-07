@@ -91,11 +91,11 @@ public class Search_activity extends AppCompatActivity implements UserClick {
 
                               feed = new Search_class(
                                         noteDataSnapshot.child("name").getValue(String.class)
-                                        , noteDataSnapshot.child("donate_prize").getValue(String.class)
+                                        , noteDataSnapshot.child("t_image").getValue(String.class)
                                         ,noteDataSnapshot.child("details").getValue(String.class)
                                         ,noteDataSnapshot.child("donate_prize").getValue(String.class)
                                         ,noteDataSnapshot.child("em").getValue(String.class)
-                                        ,noteDataSnapshot.child("donate_prize").getValue(String.class));
+                                        ,noteDataSnapshot.child("t_image").getValue(String.class));
 
                                 //  DatesClass feed = noteDataSnapshot.getValue(DatesClass.class);
                                 feed.setId(noteDataSnapshot.getKey());
@@ -115,29 +115,11 @@ public class Search_activity extends AppCompatActivity implements UserClick {
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
         _search_txt.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String query) {
 
-                if(feed.getName().contains(query.toString())){
+                if(feed.getEm().contains(query.toString())){
                     userAdapter.getFilter().filter(query);
                 }else{
                     Toast.makeText(getApplicationContext(), "No Match found",Toast.LENGTH_LONG).show();
@@ -154,19 +136,7 @@ public class Search_activity extends AppCompatActivity implements UserClick {
             }
 
         });
-
-
-
-
-
-
-
-
-
-
     }
-
-
 
 
 

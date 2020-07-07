@@ -154,6 +154,14 @@ public class Donate_home_activity extends AppCompatActivity implements UserClick
 
         }
 
+        else if (item.getItemId() == R.id.menu_ph_corona) {
+
+            Intent i = new Intent(Donate_home_activity.this , DonateCoronaActivity.class);
+            i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+            startActivity(i);
+
+        }
+
         else if (item.getItemId() == R.id.menu_ph_donates) {
 
             Intent i = new Intent(Donate_home_activity.this , Ph_DonatesActivity.class);

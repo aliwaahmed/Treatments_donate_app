@@ -8,6 +8,10 @@
     <item
         android:id="@+id/_excessive"
         android:title="Excessive" />
+
+    <item
+        android:id="@+id/_corona"
+        android:title="About COVID-19" />
     <item
         android:id="@+id/menu_logout"
         android:title="logout" />

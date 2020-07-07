@@ -86,7 +86,16 @@ public class Person_home_activity extends AppCompatActivity {
             i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
             startActivity(i);
 
-        } else if (item.getItemId() == R.id.menu_search) {
+        }
+
+        else if (item.getItemId() == R.id.menu_corona) {
+            Intent i = new Intent(Person_home_activity.this , PersonCoronaActivity.class);
+            i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+            startActivity(i);
+
+        }
+
+        else if (item.getItemId() == R.id.menu_search) {
             Intent i = new Intent(Person_home_activity.this , Search_activity.class);
             i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
             startActivity(i);

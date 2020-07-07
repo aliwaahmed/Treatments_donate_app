@@ -32,7 +32,7 @@
         android:id="@+id/search_list"
         android:layout_width="match_parent"
         android:padding="5dp"
-        tools:listitem="@layout/needs_raw"
+        tools:listitem="@layout/search_raw"
         android:layout_height="match_parent"/>
 
 

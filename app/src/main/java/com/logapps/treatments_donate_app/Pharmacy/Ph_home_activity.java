@@ -161,6 +161,13 @@ public class Ph_home_activity extends AppCompatActivity implements UserClick {
             startActivity(i);
 
         }
+        else if (item.getItemId() == R.id._corona) {
+
+            Intent i = new Intent(Ph_home_activity.this , Ph_CoronaActivity.class);
+            i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+            startActivity(i);
+
+        }
 
         return true ;
     }
