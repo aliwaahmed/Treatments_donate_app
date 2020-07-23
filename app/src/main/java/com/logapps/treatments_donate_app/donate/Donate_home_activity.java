@@ -78,23 +78,15 @@ public class Donate_home_activity extends AppCompatActivity implements UserClick
     }
 
     private void fetchFeeds() {
-
         String uid = mCurrentUser.getUid();
-
         DatabaseReference database = FirebaseDatabase.getInstance().getReference();
-
-
         database.child("needs")
-
                 .addValueEventListener(new ValueEventListener() {
                     @Override
                     public void onDataChange(DataSnapshot dataSnapshot) {
                         if (dataSnapshot != null) {
-
                             final ArrayList<All_needs_class> feeds = new ArrayList<>();
-
                             for (DataSnapshot noteDataSnapshot : dataSnapshot.getChildren()) {
-
                                 All_needs_class feed = new All_needs_class(
                                         noteDataSnapshot.child("name").getValue(String.class)
                                         , noteDataSnapshot.child("details").getValue(String.class)
@@ -106,9 +98,7 @@ public class Donate_home_activity extends AppCompatActivity implements UserClick
                                         , noteDataSnapshot.child("proof_image").getValue(String.class)
                                         ,noteDataSnapshot.child("id").getValue(String.class),
                                         noteDataSnapshot.child("id_image").getValue(String.class));
-
                                 feeds.add(feed);
-
                             }
                             userAdapter = new All_needs_Adapter(Donate_home_activity.this);
                             userAdapter.setUsersData(feeds, Donate_home_activity.this);

@@ -143,6 +143,7 @@ public class Ph_home_activity extends AppCompatActivity implements UserClick {
         super.onOptionsItemSelected(item);
 
         if (item.getItemId() == R.id.menu_prifile){
+
             Intent i = new Intent(Ph_home_activity.this , Ph_profile_activity.class);
             i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
             startActivity(i);

@@ -45,6 +45,7 @@ import com.logapps.treatments_donate_app.Person.replace_data.Replace_class;
 import com.logapps.treatments_donate_app.Person.replace_data.Replacements_user;
 import com.logapps.treatments_donate_app.Person.replace_data.UserClick;
 import com.logapps.treatments_donate_app.Pharmacy.P_data.P_class;
+import com.logapps.treatments_donate_app.Pharmacy.Ph_home_activity;
 import com.logapps.treatments_donate_app.R;
 import com.logapps.treatments_donate_app.donate.history_data.History_class;
 import com.squareup.picasso.Callback;
@@ -81,7 +82,7 @@ public class Excessive_Activity extends AppCompatActivity implements UserClick {
     private static final int PICK_IMAGE = 1;
     Uri imageUri , profile_img;
 
-    ImageView t_image ;
+    ImageView t_image  , back;
 
     DataSnapshot dataSnapshot ;
 
@@ -95,6 +96,17 @@ public class Excessive_Activity extends AppCompatActivity implements UserClick {
         mypostst = findViewById(R.id.exc_recycler);
 
         constraintLayout = findViewById(R.id.constrain);
+
+        back = findViewById(R.id.back_btn);
+
+        back.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(Excessive_Activity.this , Ph_home_activity.class);
+                i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                startActivity(i);
+            }
+        });
 
 
         mImageStorage = FirebaseStorage.getInstance().getReference();
@@ -150,7 +162,7 @@ public class Excessive_Activity extends AppCompatActivity implements UserClick {
 
 
 
-                        if (!image.equals("default")) {
+                        if (!image.equals("")) {
                             Picasso.with(getApplicationContext()).load(image).networkPolicy(NetworkPolicy.OFFLINE)
                                     .placeholder(R.drawable.avatar).into(mDisplayImage, new Callback() {
                                 @Override

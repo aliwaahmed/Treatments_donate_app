@@ -50,7 +50,7 @@ public class Ph_profile_activity extends AppCompatActivity {
     private CircleImageView mDisplayImage;
     private TextView mName, phoneNumber, manager , address;
     private Button editBtn;
-    private ImageView change_image;
+    private ImageView change_image ,back;
     private StorageReference mImageStorage;
     private ProgressDialog mProgressDilog;
     private DatabaseReference mPatientDatabase ;
@@ -69,6 +69,16 @@ public class Ph_profile_activity extends AppCompatActivity {
         address = findViewById(R.id.info_address);
         change_image = findViewById(R.id.changeImage);
         editBtn = findViewById(R.id.edit_btn);
+
+        back = findViewById(R.id.back_btn);
+        back.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(Ph_profile_activity.this , Ph_home_activity.class);
+                i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                startActivity(i);
+            }
+        });
 
         // enable firebase libraries
         mCurrentUser = FirebaseAuth.getInstance().getCurrentUser();

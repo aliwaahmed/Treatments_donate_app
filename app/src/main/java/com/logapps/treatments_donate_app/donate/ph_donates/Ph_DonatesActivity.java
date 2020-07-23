@@ -7,6 +7,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.app.ProgressDialog;
 import android.content.Context;
+import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
@@ -33,6 +34,7 @@ import com.logapps.treatments_donate_app.Pharmacy.Exc_data.ExcAdapter;
 import com.logapps.treatments_donate_app.Pharmacy.Exc_data.ExcClass;
 import com.logapps.treatments_donate_app.Pharmacy.Exc_data.Excessive_Activity;
 import com.logapps.treatments_donate_app.Pharmacy.P_data.P_class;
+import com.logapps.treatments_donate_app.Pharmacy.Ph_home_activity;
 import com.logapps.treatments_donate_app.R;
 import com.logapps.treatments_donate_app.donate.history_data.History_class;
 
@@ -55,6 +57,8 @@ public class Ph_DonatesActivity extends AppCompatActivity implements UserClick {
     private StorageReference mImageStorage;
     private ProgressDialog mProgressDilog;
 
+    ImageView back ;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -62,6 +66,16 @@ public class Ph_DonatesActivity extends AppCompatActivity implements UserClick {
         setContentView(R.layout.activity_ph__donates);
 
         mypostst = findViewById(R.id.ph_donates_recycler);
+
+        back = findViewById(R.id.back_btn);
+        back.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(Ph_DonatesActivity.this , Ph_home_activity.class);
+                i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                startActivity(i);
+            }
+        });
 
         RecyclerView.LayoutManager recyce = new LinearLayoutManager(Ph_DonatesActivity.this,LinearLayoutManager.VERTICAL,true);
         mypostst.setLayoutManager(recyce);

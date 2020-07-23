@@ -3,7 +3,9 @@ package com.logapps.treatments_donate_app.Person.needs_data;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -14,6 +16,7 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.logapps.treatments_donate_app.Person.Person_home_activity;
 import com.logapps.treatments_donate_app.R;
 import com.squareup.picasso.Picasso;
 
@@ -23,7 +26,7 @@ public class Needs_detailsActivity extends AppCompatActivity {
     TextView t__name , t__phone , t__address , tr_name ;
     DatabaseReference mUserDatabase ;
     FirebaseUser uid ;
-    ImageView tr_img,_treat_img,_id_img ;
+    ImageView tr_img,_treat_img,_id_img , back  ;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -36,6 +39,17 @@ public class Needs_detailsActivity extends AppCompatActivity {
         tr_img = findViewById(R.id._proof_img);
         _treat_img=findViewById(R.id._treat_img);
         _id_img=findViewById(R.id._id_img);
+
+        back = findViewById(R.id.back_btn);
+
+        back.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(Needs_detailsActivity.this , Person_home_activity.class);
+                i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                startActivity(i);
+            }
+        });
 
 
         try {

@@ -48,7 +48,7 @@ public class Person_profile_activity extends AppCompatActivity {
     private CircleImageView mDisplayImage;
     private TextView mName, phoneNumber, special , address;
     private Button editBtn;
-    private ImageView change_image;
+    private ImageView change_image , back;
     private StorageReference mImageStorage;
     private ProgressDialog mProgressDilog;
     private DatabaseReference mPatientDatabase ;
@@ -66,6 +66,17 @@ public class Person_profile_activity extends AppCompatActivity {
         address = findViewById(R.id.info_address);
         change_image = findViewById(R.id.changeImage);
         editBtn = findViewById(R.id.edit_btn);
+
+        back = findViewById(R.id.back_btn);
+
+        back.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(Person_profile_activity.this , Person_home_activity.class);
+                i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                startActivity(i);
+            }
+        });
 
 
         mCurrentUser = FirebaseAuth.getInstance().getCurrentUser();
@@ -206,32 +217,37 @@ public class Person_profile_activity extends AppCompatActivity {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
 
-                String name = dataSnapshot.child("per_name").getValue().toString();
-                String phone = dataSnapshot.child("per_phone").getValue().toString();
-                String Iaddress = dataSnapshot.child("per_address").getValue().toString();
-                final String image = dataSnapshot.child("image").getValue().toString();
-                String thumb_image = dataSnapshot.child("thumb_image").getValue().toString();
+                try {
+                    String name = dataSnapshot.child("per_name").getValue().toString();
+                    String phone = dataSnapshot.child("per_phone").getValue().toString();
+                    String Iaddress = dataSnapshot.child("per_address").getValue().toString();
+                    final String image = dataSnapshot.child("image").getValue().toString();
+                    String thumb_image = dataSnapshot.child("thumb_image").getValue().toString();
 
-                mName.setText(name);
-                phoneNumber.setText(phone);
-                address.setText(Iaddress);
+                    mName.setText(name);
+                    phoneNumber.setText(phone);
+                    address.setText(Iaddress);
 
-                //
-                if (!image.equals("default")) {
-                    Picasso.with(Person_profile_activity.this).load(image).networkPolicy(NetworkPolicy.OFFLINE)
-                            .placeholder(R.drawable.avatar).into(mDisplayImage, new Callback() {
-                        @Override
-                        public void onSuccess() {
+                    //
+                    if (!image.equals("default")) {
+                        Picasso.with(Person_profile_activity.this).load(image).networkPolicy(NetworkPolicy.OFFLINE)
+                                .placeholder(R.drawable.avatar).into(mDisplayImage, new Callback() {
+                            @Override
+                            public void onSuccess() {
 
-                        }
+                            }
 
-                        @Override
-                        public void onError() {
+                            @Override
+                            public void onError() {
 
-                            Picasso.with(Person_profile_activity.this).load(image).placeholder(R.drawable.avatar).into(mDisplayImage);
-                        }
-                    });
+                                Picasso.with(Person_profile_activity.this).load(image).placeholder(R.drawable.avatar).into(mDisplayImage);
+                            }
+                        });
+                    }
+                }catch (NullPointerException e){
+
                 }
+
             }
 
             @Override

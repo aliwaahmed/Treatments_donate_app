@@ -64,23 +64,32 @@ public class Person_register_activity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-                //take vars here
-                String getemail = email.getText().toString().trim();
-                String getcha_name = name.getText().toString().trim();
-                String getid = id.getText().toString().trim();
-                String getpassword = pass.getText().toString().trim();
-                String getphone = phone.getText().toString().trim();
-                String getaddress = address.getText().toString().trim();
+
+                if (phone.length() < 11 & id.length()<14){
+
+                    Toast.makeText(Person_register_activity.this, "invalid phone & id ", Toast.LENGTH_SHORT).show();
+
+                }else {
+
+                    //take vars here
+                    String getemail = email.getText().toString().trim();
+                    String getcha_name = name.getText().toString().trim();
+                    String getid = id.getText().toString().trim();
+                    String getpassword = pass.getText().toString().trim();
+                    String getphone = phone.getText().toString().trim();
+                    String getaddress = address.getText().toString().trim();
 
 
-                //check if vars are empty ..
-                if (!TextUtils.isEmpty(getemail) || !TextUtils.isEmpty(getpassword)){
-                    mProgress.setTitle("Registering User");
-                    mProgress.setMessage("Wait while we create your account");
-                    mProgress.setCanceledOnTouchOutside(false);
-                    mProgress.show();
-                    callsignup(getemail, getpassword, getcha_name , getphone , getaddress , getid);
+                    //check if vars are empty ..
+                    if (!TextUtils.isEmpty(getemail) || !TextUtils.isEmpty(getpassword)){
+                        mProgress.setTitle("Registering User");
+                        mProgress.setMessage("Wait while we create your account");
+                        mProgress.setCanceledOnTouchOutside(false);
+                        mProgress.show();
+                        callsignup(getemail, getpassword, getcha_name , getphone , getaddress , getid);
+                    }
                 }
+
 
             }
         });

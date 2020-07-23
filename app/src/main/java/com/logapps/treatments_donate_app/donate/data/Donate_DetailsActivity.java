@@ -162,7 +162,7 @@ public class Donate_DetailsActivity extends AppCompatActivity {
                 ignore.setVisibility(View.GONE);
                 accept.setVisibility(View.GONE);
 
-                acceptedTxt.setVisibility(View.VISIBLE);
+        //        acceptedTxt.setVisibility(View.VISIBLE);
 
                 Toast.makeText(Donate_DetailsActivity.this, "" + currentDateTimeString, Toast.LENGTH_LONG).show();
 

@@ -3,7 +3,9 @@ package com.logapps.treatments_donate_app.donate.ph_donates;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -21,7 +23,7 @@ public class Ph_Donates_Details_Activity extends AppCompatActivity {
 
 
     TextView t__name , t__phone , t__address , tr_name , id_txt , chName , tryAddress , qunt;
-    ImageView tr_img ;
+    ImageView tr_img , back ;
     private FirebaseUser mCurrent_Users ;
     DatabaseReference  nameDatabase ;
     @Override
@@ -37,6 +39,17 @@ public class Ph_Donates_Details_Activity extends AppCompatActivity {
         t__phone = findViewById(R.id.t_phone);
         tr_name = findViewById(R.id.tr_name);
         tr_img = findViewById(R.id._treat_img);
+
+        back = findViewById(R.id.back_btn);
+
+        back.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(Ph_Donates_Details_Activity.this , Ph_DonatesActivity.class);
+                i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                startActivity(i);
+            }
+        });
 
 //        nameDatabase = FirebaseDatabase.getInstance().getReference().child("ph_Users").child(mCurrent_Users.getUid());
 
@@ -54,20 +67,6 @@ public class Ph_Donates_Details_Activity extends AppCompatActivity {
             String userId = getIntent().getStringExtra("id");
             String getImage = getIntent().getStringExtra("exc_image");
 
-
-//            nameDatabase.addValueEventListener(new ValueEventListener() {
-//                @Override
-//                public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-//
-//                    String cha_name = dataSnapshot.child("ph_name").getValue().toString();
-//                    chName.setText(cha_name);
-//                }
-//
-//                @Override
-//                public void onCancelled(@NonNull DatabaseError databaseError) {
-//
-//                }
-//            });
 
             Picasso.with(Ph_Donates_Details_Activity.this).load(getImage).placeholder(R.drawable.imgbg).into(tr_img);
 

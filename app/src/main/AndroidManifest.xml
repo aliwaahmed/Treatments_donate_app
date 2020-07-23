@@ -10,12 +10,13 @@
 
     <application
         android:allowBackup="true"
-        android:icon="@mipmap/ic_launcher"
+        android:icon="@drawable/logoapp"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".Pharmacy.Ph_CoronaActivity"></activity>
+        <activity android:name=".MainActivity"></activity>
+        <activity android:name=".Pharmacy.Ph_CoronaActivity" />
         <activity android:name=".Person.PersonCoronaActivity" />
         <activity android:name=".donate.DonateCoronaActivity" />
         <activity android:name=".donate.ph_donates.Ph_Donates_Details_Activity" />
@@ -42,7 +43,7 @@
         <activity android:name=".Pharmacy.Ph_home_activity" />
         <activity android:name=".Pharmacy.Ph_register_activity" />
         <activity android:name=".Pharmacy.Ph_login_activity" />
-        <activity android:name=".MainActivity">
+        <activity android:name=".SplashActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
