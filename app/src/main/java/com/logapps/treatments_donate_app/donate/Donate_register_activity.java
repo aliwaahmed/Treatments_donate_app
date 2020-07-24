@@ -95,6 +95,7 @@ public class Donate_register_activity extends AppCompatActivity {
                     String getlicence = licence.getText().toString().trim();
 
 
+                    //
                     //check if vars are empty ..
                     if (!TextUtils.isEmpty(getemail) || !TextUtils.isEmpty(getpassword)){
                         mProgress.setTitle("Registering User");
