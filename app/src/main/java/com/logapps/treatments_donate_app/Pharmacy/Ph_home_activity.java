@@ -108,12 +108,23 @@ public class Ph_home_activity extends AppCompatActivity implements UserClick {
 
                             for (DataSnapshot noteDataSnapshot : dataSnapshot.getChildren()) {
 
+//                                String Dname  = getIntent().getStringExtra("details");
+//                                String Daddress = getIntent().getStringExtra("donate_address");
+//                                String Dphone = getIntent().getStringExtra("donate_call");
+//
+//                                String ef_m = getIntent().getStringExtra("em");
+//                                String d_price = getIntent().getStringExtra("donate_prize");
+//                                String getImage = getIntent().getStringExtra("t_image");
+
+
+
                                 P_class feed = new P_class(
-                                        noteDataSnapshot.child("name").getValue(String.class)
-                                        , noteDataSnapshot.child("details").getValue(String.class)
+                                        noteDataSnapshot.child("details").getValue(String.class)
+                                        , noteDataSnapshot.child("name").getValue(String.class)
                                         , noteDataSnapshot.child("t_image").getValue(String.class)
-                                        , noteDataSnapshot.child("ex_date").getValue(String.class) ,
-                                        noteDataSnapshot.child("ex_image").getValue(String.class)
+                                        , noteDataSnapshot.child("donate_call").getValue(String.class) ,
+                                        noteDataSnapshot.child("donate_address").getValue(String.class),
+                                        noteDataSnapshot.child("em").getValue(String.class)
                                         );
 
                                 feeds.add(feed);

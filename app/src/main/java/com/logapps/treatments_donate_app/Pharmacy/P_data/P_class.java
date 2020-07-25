@@ -7,13 +7,15 @@ public class P_class {
     private String Img ;
     private String Address ;
     private String Phone_number ;
+    private String ef_material ;
 
-    public P_class(String name, String details, String img, String address, String phone_number) {
+    public P_class(String name, String details, String img, String address, String phone_number, String ef_material) {
         Name = name;
         Details = details;
         Img = img;
         Address = address;
         Phone_number = phone_number;
+        this.ef_material = ef_material;
     }
 
     public String getName() {
@@ -56,6 +58,14 @@ public class P_class {
         Phone_number = phone_number;
     }
 
+    public String getEf_material() {
+        return ef_material;
+    }
+
+    public void setEf_material(String ef_material) {
+        this.ef_material = ef_material;
+    }
+
     @Override
     public String toString() {
         return "P_class{" +
@@ -64,6 +74,7 @@ public class P_class {
                 ", Img='" + Img + '\'' +
                 ", Address='" + Address + '\'' +
                 ", Phone_number='" + Phone_number + '\'' +
+                ", ef_material='" + ef_material + '\'' +
                 '}';
     }
 }
