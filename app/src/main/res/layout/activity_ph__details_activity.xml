@@ -137,6 +137,7 @@
            android:fontFamily="@font/geo"
            android:textStyle="bold"
            android:padding="10dp"/>
+
        <TextView
            android:id="@+id/ef_material"
            android:layout_width="match_parent"
