@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -19,6 +20,8 @@ public class Ph_Details_activity extends AppCompatActivity {
     TextView name , phone , address , em , price ;
     ImageView imageView , back ;
 
+    Button enter ;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -30,6 +33,17 @@ public class Ph_Details_activity extends AppCompatActivity {
         em = findViewById(R.id.ef_material);
         price = findViewById(R.id.price);
         back = findViewById(R.id.back_btn);
+
+        enter = findViewById(R.id.enter);
+
+        enter.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(Ph_Details_activity.this , Ph_home_activity.class);
+                i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                startActivity(i);
+            }
+        });
 
         imageView = findViewById(R.id.final_image);
 

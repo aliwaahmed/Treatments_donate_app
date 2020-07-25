@@ -167,4 +167,20 @@
         android:layout_height="300dp"
         android:background="@drawable/imgbg"
         android:layout_margin="10dp"/>
+
+    <EditText
+        android:id="@+id/entertxt"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:layout_marginHorizontal="20dp"
+        android:hint="Enter replacement"/>
+
+    <Button
+        android:id="@+id/enter"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Enter"
+        android:textAllCaps="false"/>
+
 </LinearLayout>
